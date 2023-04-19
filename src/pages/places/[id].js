@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import RatingForm from "../../components/RatingForm";
+import ShowRating from "../../components/ShowRating";
 
 export default function Singleplace() {
   const router = useRouter();
@@ -53,6 +54,9 @@ export default function Singleplace() {
 
   if (isLoading) return <div>We are currently loading this place.</div>;
 
+  const ratingKeys = Object.keys(data).filter((key) => key.includes("r_"));
+  console.log(ratingKeys);
+
   return (
     <div className="flex flex-col ">
       <h1>{data.name}</h1>
@@ -68,16 +72,76 @@ export default function Singleplace() {
         })}
       </ul>
       <h2>ratings:</h2>
-      dresscode: {data.r_dresscode}; <br />
-      amountOfPeople: {data.r_amountOfPeople};<br />
-      age: {data.r_age};<br />
-      smoking?: {data.r_isSmoking};<br />
-      lights: {data.r_lights};<br />
-      prices: {data.r_prices};<br />
-      staff: {data.r_staff};<br />
-      temperature: {data.r_temperature};<br />
-      volume: {data.r_volume};<br />
-      <hr />
+      <ShowRating
+        left="hip"
+        right="quirky"
+        title="dresscode"
+        count={data.r_dresscode}
+        range="3"
+      />
+      <ShowRating
+        left="ok"
+        right="cringe"
+        title="should i bring my parents?"
+        count={data.r_cringe}
+        range="3"
+      />
+      <ShowRating
+        left="empty"
+        right="packed"
+        title="people / squaremeter"
+        count={data.r_amountOfPeople}
+        range="3"
+      />
+      <ShowRating
+        left="talkin"
+        right="dancin"
+        title="volume"
+        count={data.r_volume}
+        range="3"
+      />
+      <ShowRating
+        left="high school"
+        right="pension"
+        title="age"
+        count={data.r_age}
+        range="3"
+      />
+      <ShowRating
+        left="fresh laundry"
+        right="smoked salmon"
+        title="how we gonna smell next day"
+        count={data.r_isSmoking}
+        range="3"
+      />
+      <ShowRating
+        left="darkroom"
+        right="floodlight"
+        title="lights"
+        count={data.r_lights}
+        range="3"
+      />
+      <ShowRating
+        left="basically for free"
+        right="monthly salary"
+        title="prices"
+        count={data.r_prices}
+        range="3"
+      />
+      <ShowRating
+        left="friendly"
+        right="wanna be yelled at"
+        title="staff"
+        count={data.r_staff}
+        range="3"
+      />
+      <ShowRating
+        left="siberia"
+        right="hell"
+        title="bring a sweater?"
+        count={data.r_temperature}
+        range="3"
+      />
       <h3 className="py-10">wanna do comments? you should.</h3>
       <form onSubmit={(event) => handleSubmit(event)}>
         <fieldset>

@@ -46,7 +46,6 @@ export default async function handler(request, response) {
         const ratingData = request.body;
 
         console.log(ratingData.r_dresscode);
-        //ratingData.forEach((prop) => {});
 
         async function updateRatings(ratingData) {
           const { id } = request.query;
