@@ -1,4 +1,5 @@
 import useSWR from "swr";
+import Link from "next/link";
 
 export default function List() {
   const { data, isLoading } = useSWR("/api/places", {
@@ -19,6 +20,14 @@ export default function List() {
           >
             <p>name: {place.name}</p>
             <p>location: {place.location}</p>
+            <Link
+              href={`places/${place._id}`}
+              passHref
+              legacyBehavior
+              className="button"
+            >
+              more information
+            </Link>
           </li>
         );
       })}
