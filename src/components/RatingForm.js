@@ -2,16 +2,14 @@ import RangeInput from "./RangeInput";
 
 export default function RatingForm() {
   return (
-    <>
-      <hr />
-      <h3>Initial rating</h3>
+    <div className="ratingWrapper flex flex-col gap-4">
       <p>
         To help others to vibe with your place, its helpful to go to through
         some absurd criteria which will help us to put your quirky place in the
         right spotlight.
       </p>
-      <fieldset className="w-fit flex flex-col items-center">
-        <label className="block" htmlFor="r_dresscode">
+      <fieldset className="w-fit flex flex-col gap-4 border-b-2 pb-4 items-center">
+        <label className="self-center text-lg" htmlFor="r_dresscode">
           lets talk outfits! certain dresscode?
         </label>
         <RangeInput
@@ -24,7 +22,7 @@ export default function RatingForm() {
           right="quirky"
         />
       </fieldset>
-      <fieldset className="w-fit flex flex-col items-center">
+      <fieldset className="w-fit flex flex-col gap-4 border-b-2 pb-4 items-center">
         <label className="block" htmlFor="amountOfPeople">
           is the place usually packed?
         </label>
@@ -38,7 +36,7 @@ export default function RatingForm() {
           right="packed & sweaty"
         />
       </fieldset>
-      <fieldset className="w-fit flex flex-col items-center">
+      <fieldset className="w-fit flex flex-col gap-4 border-b-2 pb-4 items-center">
         <label className="block" htmlFor="volume">
           Volume
         </label>
@@ -52,7 +50,7 @@ export default function RatingForm() {
           right="dancin"
         />
       </fieldset>
-      <fieldset className="w-fit flex flex-col items-center">
+      <fieldset className="w-fit flex flex-col gap-4 border-b-2 pb-4 items-center">
         <label className="block" htmlFor="isSmoking">
           are we gonna get smoked?
         </label>
@@ -66,7 +64,7 @@ export default function RatingForm() {
           right="smoked salmon"
         />
       </fieldset>
-      <fieldset className="w-fit flex flex-col items-center">
+      <fieldset className="w-fit flex flex-col gap-4 border-b-2 pb-4 items-center">
         <label className="block" htmlFor="temperature">
           bring a pullover?
         </label>
@@ -80,7 +78,7 @@ export default function RatingForm() {
           right="devils kitchen"
         />
       </fieldset>
-      <fieldset className="w-fit flex flex-col items-center">
+      <fieldset className="w-fit flex flex-col gap-4 border-b-2 pb-4 items-center">
         <label className="block" htmlFor="lights">
           Lights
         </label>
@@ -94,7 +92,7 @@ export default function RatingForm() {
           right="floodlight"
         />
       </fieldset>
-      <fieldset className="w-fit flex flex-col items-center">
+      <fieldset className="w-fit flex flex-col gap-4 border-b-2 pb-4 items-center">
         <label className="block" htmlFor="cringe">
           Cringeness
         </label>
@@ -108,7 +106,7 @@ export default function RatingForm() {
           right="cringealert"
         />
       </fieldset>
-      <fieldset className="w-fit flex flex-col items-center">
+      <fieldset className="w-fit flex flex-col gap-4 border-b-2 pb-4 items-center">
         <label className="block" htmlFor="age">
           Average age
         </label>
@@ -122,7 +120,7 @@ export default function RatingForm() {
           right="straight into pension"
         />
       </fieldset>
-      <fieldset className="w-fit flex flex-col items-center">
+      <fieldset className="w-fit flex flex-col gap-4 border-b-2 pb-4 items-center">
         <label className="block" htmlFor="staff">
           how&apos;s staff doing?
         </label>
@@ -136,7 +134,7 @@ export default function RatingForm() {
           right="would bring my parents"
         />
       </fieldset>
-      <fieldset className="w-fit flex flex-col items-center">
+      <fieldset className="w-fit flex flex-col gap-4 border-b-2 pb-4 items-center">
         <label className="block" htmlFor="prices">
           how much money should i bring?
         </label>
@@ -150,6 +148,6 @@ export default function RatingForm() {
           right="monthly salary"
         />
       </fieldset>
-    </>
+    </div>
   );
 }

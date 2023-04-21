@@ -1,6 +1,12 @@
 import mongoose from "mongoose";
+import { comment } from "postcss";
 
 const { Schema } = mongoose;
+
+const commentSchema = new Schema({
+  body: { type: String, required: true },
+  date: { type: String, required: true },
+});
 
 const placeSchema = new Schema({
   name: { type: String, required: true },
@@ -8,7 +14,7 @@ const placeSchema = new Schema({
   location: { type: String, required: true },
   //image: { type: String, required: false },
   //mapURL: { type: String, required: true },
-  comment: [{ type: String, required: true }],
+  comment: [commentSchema],
   r_dresscode: [{ type: Number, required: true }],
   r_amountOfPeople: [{ type: Number, required: true }],
   r_volume: [{ type: Number, required: true }],

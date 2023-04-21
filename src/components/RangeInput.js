@@ -4,7 +4,7 @@ export default function RangeInput({ min, max, step, id, name, left, right }) {
   const [value, setValue] = useState(1);
 
   return (
-    <div className="relative flex flex-row nowrap w-fit px-12 gap-x-12">
+    <div className="relative grid grid-cols-3 gap-2 nowrap w-fit gap-4">
       <span className="left relative left-0">{left}</span>
       <input
         type="range"
@@ -18,7 +18,7 @@ export default function RangeInput({ min, max, step, id, name, left, right }) {
           setValue(radius);
         }}
       />
-      <span className="right relative right-0">{right}</span>
+      <span className="right relative text-right">{right}</span>
     </div>
   );
 }
