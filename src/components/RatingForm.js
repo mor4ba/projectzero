@@ -3,7 +3,7 @@ import RangeInput from "./RangeInput";
 export default function RatingForm() {
   return (
     <div className="ratingWrapper flex flex-col gap-4">
-      <p>
+      <p className="mb-6">
         To help others to vibe with your place, its helpful to go to through
         some absurd criteria which will help us to put your quirky place in the
         right spotlight.
@@ -15,8 +15,9 @@ export default function RatingForm() {
         <RangeInput
           id="r_dresscode"
           name="r_dresscode"
-          min="1"
-          max="3"
+          min="0"
+          max="10"
+          start="5"
           step="0.5"
           left="hip"
           right="quirky"
@@ -29,9 +30,10 @@ export default function RatingForm() {
         <RangeInput
           id="amountOfPeople"
           name="r_amountOfPeople"
-          min="1"
-          max="3"
+          min="0"
+          max="10"
           step="0.5"
+          start="5"
           left="tempelhofer feld"
           right="packed & sweaty"
         />
@@ -42,8 +44,9 @@ export default function RatingForm() {
         </label>
         <RangeInput
           id="volume"
-          min="1"
-          max="3"
+          min="0"
+          max="10"
+          start="5"
           step="0.5"
           name="r_volume"
           left="talkin"
@@ -56,8 +59,9 @@ export default function RatingForm() {
         </label>
         <RangeInput
           id="isSmoking"
-          min="1"
-          max="3"
+          min="0"
+          max="10"
+          start="5"
           step="0.5"
           name="r_isSmoking"
           left="crisp fresh laundry"
@@ -70,9 +74,10 @@ export default function RatingForm() {
         </label>
         <RangeInput
           id="temperature"
-          min="1"
-          max="3"
+          min="0"
+          max="10"
           step="0.5"
+          start="5"
           name="r_temperature"
           left="siberia"
           right="devils kitchen"
@@ -84,8 +89,9 @@ export default function RatingForm() {
         </label>
         <RangeInput
           id="lights"
-          min="1"
-          max="3"
+          min="0"
+          max="10"
+          start="5"
           step="0.5"
           name="r_lights"
           left="darkroom"
@@ -98,8 +104,9 @@ export default function RatingForm() {
         </label>
         <RangeInput
           id="cringe"
-          min="1"
-          max="3"
+          min="0"
+          max="10"
+          start="5"
           step="0.5"
           name="r_cringe"
           left="not at all"
@@ -112,8 +119,9 @@ export default function RatingForm() {
         </label>
         <RangeInput
           id="age"
-          min="1"
-          max="3"
+          min="0"
+          max="10"
+          start="5"
           step="0.5"
           name="r_age"
           left="fresh outta high school"
@@ -126,8 +134,9 @@ export default function RatingForm() {
         </label>
         <RangeInput
           id="staff"
-          min="1"
-          max="3"
+          min="0"
+          max="10"
+          start="5"
           step="0.5"
           name="r_staff"
           left="want to be yelled at"
@@ -140,8 +149,9 @@ export default function RatingForm() {
         </label>
         <RangeInput
           id="prices"
-          min="1"
-          max="3"
+          min="0"
+          max="10"
+          start="5"
           step="0.5"
           name="r_prices"
           left="basically for free"

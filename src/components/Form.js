@@ -35,40 +35,50 @@ export default function Form() {
   return (
     <form
       onSubmit={(event) => handleSubmit(event)}
-      className="b-white border-2 p-10 flex align-center flex-col gap-6 items-center"
+      className="p-6 flex align-center flex-col gap-6 items-center"
     >
-      <fieldset className="w-fit">
+      <fieldset className="w-full">
         <label htmlFor="name" className="block">
           Tell us it&apos;s quirky name!
         </label>
-        <input className="text-black" type="text" id="name" name="name" />
+        <input
+          className="text-white bg-transparent rounded-lg border-2 my-2"
+          type="text"
+          id="name"
+          name="name"
+        />
       </fieldset>
-      <fieldset className="w-fit">
+      <fieldset className="w-full">
         <label htmlFor="location" className="block">
           Where the fun at?
         </label>
         <input
-          className="text-black"
+          className="text-white bg-transparent rounded-lg border-2 my-2"
           type="text"
           id="location"
           name="location"
         />
       </fieldset>
-      <fieldset className="w-fit">
+      <fieldset className="w-full">
         <label htmlFor="comment" className="block">
           Want to leave an initial comment to tell people about the sunny sides
           of this quirky place?
         </label>
         <textarea
-          className="text-black"
+          className="text-white w-full bg-transparent border-2 border-white rounded-lg my-4"
           type="text"
           id="comment"
-          name="comment"
+          name="body"
         />
       </fieldset>
       <RatingForm />
-      <button type="submit" className="px-4 py-2 b-white border-2 my-4">
-        Submit!
+      <button
+        className="relative inline-flex items-center justify-center p-0.5 mb-6 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800"
+        type="submit"
+      >
+        <span className="relative px-5 py-2 transition-all ease-in duration-75 bg-transparent dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+          submit
+        </span>
       </button>
     </form>
   );

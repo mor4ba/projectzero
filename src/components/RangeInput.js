@@ -1,7 +1,16 @@
 import { useState } from "react";
 
-export default function RangeInput({ min, max, step, id, name, left, right }) {
-  const [value, setValue] = useState(1);
+export default function RangeInput({
+  min,
+  max,
+  step,
+  id,
+  name,
+  left,
+  right,
+  start,
+}) {
+  const [value, setValue] = useState(5);
 
   return (
     <div className="relative grid grid-cols-3 gap-2 nowrap w-fit gap-4">

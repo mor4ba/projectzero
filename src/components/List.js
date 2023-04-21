@@ -9,8 +9,8 @@ export default function List() {
   if (isLoading) return <h2>this gonna take some time!</h2>;
 
   return (
-    <ul role="list">
-      <h2>entries</h2>
+    <ul className="flex flex-col w-full mt-20" role="list">
+      <h1 className="uppercase text-2xl">entries</h1>
       {data.map((place) => {
         return (
           <li

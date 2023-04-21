@@ -18,7 +18,30 @@ export default async function handler(request, response) {
       try {
         const placeData = request.body;
         const place = new Place(placeData);
-        await place.save();
+        await place
+          .save()
+          .then(function (place) {
+            const newId = place._id;
+            console.log(place);
+            updateInitialComment(newId);
+          })
+          .catch(function (err) {
+            console.log(err);
+          });
+
+        async function updateInitialComment(id) {
+          var dateObj = new Date();
+          var month = dateObj.toLocaleString("en-us", { month: "short" });
+          var day = dateObj.getUTCDate();
+          var year = dateObj.getUTCFullYear();
+
+          let newdate = `${month.toUpperCase()} ${day}, ${year}`;
+          const newPlace = await Place.findByIdAndUpdate(id, {
+            comment: [{ body: placeData.body, date: newdate }],
+          });
+
+          newPlace.save();
+        }
 
         response.status(201).json({ status: "place created" });
       } catch (error) {
