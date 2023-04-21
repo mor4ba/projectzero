@@ -1,6 +1,7 @@
 import Place from "../../../../db/models/Place";
 import dbConnect from "../../../../db/connect";
-import { comment } from "postcss";
+
+import { uid } from "uid";
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -11,7 +12,6 @@ export default async function handler(request, response) {
 
   switch (request.method) {
     case "GET":
-      console.log("get request is on!");
       const places = await Place.findById(id);
       if (!places) {
         return response.status(404).json({ status: "Not found" });
@@ -24,11 +24,21 @@ export default async function handler(request, response) {
         const commentData = request.body;
 
         async function updateComments(commentData) {
+          var dateObj = new Date();
+          var month = dateObj.toLocaleString("en-us", { month: "short" });
+          var day = dateObj.getUTCDate();
+          var year = dateObj.getUTCFullYear();
+
+          let newdate = `${month.toUpperCase()} ${day}, ${year}`;
+
           const { id } = request.query;
           const currentPlace = await Place.findById(id);
           const newComment = commentData.comment;
           const updatedComments = await Place.findByIdAndUpdate(id, {
-            comment: [...currentPlace.comment, newComment],
+            comment: [
+              ...currentPlace.comment,
+              { body: newComment, date: newdate },
+            ],
           });
           updatedComments.save();
         }
