@@ -13,7 +13,7 @@ export default function RangeInput({
   const [value, setValue] = useState(5);
 
   return (
-    <div className="relative grid grid-cols-3 gap-2 nowrap w-fit gap-4">
+    <div className="relative grid grid-cols-3 gap-2 nowrap w-full gap-4 px-4">
       <span className="left relative left-0">{left}</span>
       <input
         type="range"

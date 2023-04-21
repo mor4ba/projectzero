@@ -3,12 +3,17 @@ import { useRouter } from "next/router";
 import RatingForm from "../../components/RatingForm";
 import RatingDisplay from "../../components/RatingDisplay";
 import CommentSection from "../../components/CommentSection";
+import React from "react";
+import Flag from "../../components/graphics/Flag";
+import { useState } from "react";
 
 export default function Singleplace() {
   const router = useRouter();
   const { id } = router.query;
   const place = useSWR(`/api/places/${id}`);
   const { data, isLoading } = place;
+
+  const [isVisited, setisVisited] = useState(false);
 
   async function handleAddComment(data) {
     const response = await fetch(`/api/places/${id}`, {
@@ -53,11 +58,22 @@ export default function Singleplace() {
     formKey === "rating" ? handleUpdateRating(data) : handleAddComment(data);
   }
 
+  console.log(isVisited);
+
   if (isLoading) return <div>We are currently loading this place.</div>;
 
   return (
     <div className="flex flex-col p-20 px-10">
-      <h1 className="text-2xl mb-2 py-4 border-b border-white">{data.name}</h1>
+      <div className="entry-section flex flex-row justify-between border-b-2 pb-4 mb-2 border-white">
+        <h1 className="text-2xl">{data.name}</h1>
+        <button
+          className="flex text-2xl"
+          onClick={() => setisVisited((isVisited) => !isVisited)}
+        >
+          {isVisited ? "" : "been here? hit the flag."}
+          <Flag state={isVisited} />
+        </button>
+      </div>
       <p className="text-xl mb-10">location: {data.location}</p>
       <RatingDisplay data={data} />
       <CommentSection data={data} onSubmit={handleSubmit} />
