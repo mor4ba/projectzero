@@ -10,8 +10,10 @@ const commentSchema = new Schema({
 
 const placeSchema = new Schema({
   name: { type: String, required: true },
-  //created: new Date(),
   location: { type: String, required: true },
+  latitude: { type: Number, required: false },
+  longitude: { type: Number, required: false },
+  //inModeration: { type: boolean, required: false },
   //image: { type: String, required: false },
   //mapURL: { type: String, required: true },
   comment: [commentSchema],
