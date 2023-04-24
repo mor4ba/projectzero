@@ -4,7 +4,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import Map, { Marker, GeolocateControl } from "react-map-gl";
 import Image from "next/image";
 import useSWR from "swr";
-import Geocoder from "react-mapbox-gl-geocoder";
+//import Geocoder from "react-mapbox-gl-geocoder";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibW9yNGJhIiwiYSI6ImNsZ2dsc2R6NjBjcWwzZXJyM2hqdGZrejEifQ.Tt-v3iroj4ffhu-uJ69Haw";
