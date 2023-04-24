@@ -65,10 +65,19 @@ export default function RenderMap() {
         positionOptions={{ enableHighAccuracy: true }}
         trackUserLocation={true}
       />
-      <Marker longitude={13.4} latitude={52.5} anchor="bottom">
-        {/* <Image src="/flag.svg" alt="mark" width={25} height="25" /> */}
-        <Image src="/red_pin@3x.png" alt="marker" width={25} height={25} />
-      </Marker>
+
+      {data.map((place) => {
+        return (
+          <Marker
+            key={place._id}
+            longitude={place.longitude}
+            latitude={place.latitude}
+            anchor="bottom"
+          >
+            <Image src="/red_pin@3x.png" alt="marker" width={25} height={25} />
+          </Marker>
+        );
+      })}
     </Map>
   );
 }
