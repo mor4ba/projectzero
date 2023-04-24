@@ -26,10 +26,6 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-body main {
-  padding: 1rem;
-}
-
 body main form input[type="text"] {
   padding: 0.2rem 0.5rem;
   outline: 0;
