@@ -4,7 +4,6 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import Map, { Marker, GeolocateControl } from "react-map-gl";
 import Image from "next/image";
 import useSWR from "swr";
-//import Geocoder from "react-mapbox-gl-geocoder";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibW9yNGJhIiwiYSI6ImNsZ2dsc2R6NjBjcWwzZXJyM2hqdGZrejEifQ.Tt-v3iroj4ffhu-uJ69Haw";
@@ -67,7 +66,8 @@ export default function RenderMap() {
         trackUserLocation={true}
       />
       <Marker longitude={13.4} latitude={52.5} anchor="bottom">
-        <Image src="/flag.svg" alt="mark" width={25} height="25" />
+        {/* <Image src="/flag.svg" alt="mark" width={25} height="25" /> */}
+        <Image src="/red_pin@3x.png" alt="marker" width={25} height={25} />
       </Marker>
     </Map>
   );
