@@ -56,3 +56,30 @@ body main form input[type="text"]:focus  {
   margin: 12px;
   border-radius: 4px;
 }
+
+Marker {
+  z-index: 10;
+  cursor: pointer;
+}
+
+.mapboxgl-popup {
+  color: black;
+}
+
+.mapboxgl-popup-content {
+  padding: 1rem 1.5rem !important;
+}
+
+.mapboxgl-popup-close-button {
+  font-size: 1rem;
+  padding: 0.2rem;
+  right: 0.35rem !important;
+  border: none;
+  outline: none;
+}
+
+.mapboxgl-popup-close-button:hover,
+.mapboxgl-popup-close-button:focus {
+  outline: none;
+  border: none;
+}
