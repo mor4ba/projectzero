@@ -26,12 +26,16 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-body main form input[type="text"] {
+body main form input[type="text"],
+body main form input[type="number"],
+body main form textarea {
   padding: 0.2rem 0.5rem;
   outline: 0;
 }
 
-body main form input[type="text"]:focus  {
+body main form input[type="text"]:focus,
+body main form input[type="number"]:focus,
+body main form textarea:focus {
   outline: 0;
 }
 

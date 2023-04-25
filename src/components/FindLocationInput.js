@@ -42,6 +42,7 @@ export default function FindLocationInput() {
 
   return (
     <Wrapper>
+      <label htmlFor="location">Address</label>
       <input
         className="text-white bg-transparent rounded-lg border-2 my-2"
         type="text"

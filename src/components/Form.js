@@ -52,10 +52,21 @@ export default function Form() {
       </fieldset>
 
       <fieldset className="w-full">
-        <label htmlFor="location" className="block">
+        <legend htmlFor="location" className="block">
           Where the fun at?
-        </label>
+        </legend>
         <FindLocationInput />
+      </fieldset>
+      <fieldset>
+        <legend htmlFor="typeOf">What kind of place?</legend>
+        <label htmlFor="bar">Bar</label>
+        <input type="radio" name="typeOf" id="bar" value="bar" />
+        <label htmlFor="club">Club</label>
+        <input type="radio" name="typeOf" id="club" value="club" />
+        <label htmlFor="restaurant">Restaurant</label>
+        <input type="radio" name="typeOf" id="restaurant" value="restaurant" />
+        <label htmlFor="other">Other</label>
+        <input type="radio" name="typeOf" id="other" value="other" />
       </fieldset>
       <fieldset className="w-full">
         <label htmlFor="comment" className="block">
