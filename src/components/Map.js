@@ -11,6 +11,7 @@ import Map, {
 } from "react-map-gl";
 import Image from "next/image";
 import useSWR from "swr";
+import Pin from "./graphics/Pin";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibW9yNGJhIiwiYSI6ImNsZ2dsc2R6NjBjcWwzZXJyM2hqdGZrejEifQ.Tt-v3iroj4ffhu-uJ69Haw";
@@ -72,7 +73,7 @@ export default function RenderMap() {
               console.log(place);
             }}
           >
-            <Image src="/red_pin@3x.png" alt="marker" width={25} height={25} />
+            <Pin typeOf={place.typeOf} />
           </Marker>
         );
       })}
