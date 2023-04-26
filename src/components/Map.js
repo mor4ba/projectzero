@@ -1,5 +1,5 @@
-import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-import React, { useRef, useEffect, useState } from "react";
+import mapboxgl from "mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
+import React, { useEffect, useState } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Map, {
   Marker,
@@ -9,7 +9,6 @@ import Map, {
   ScaleControl,
   GeolocateControl,
 } from "react-map-gl";
-import Image from "next/image";
 import useSWR from "swr";
 import Pin from "./graphics/Pin";
 
@@ -54,6 +53,7 @@ export default function RenderMap() {
       <GeolocateControl
         positionOptions={{ enableHighAccuracy: true }}
         trackUserLocation={true}
+        position={`top-left`}
       />
       <FullscreenControl position="bottom-left" />
       <NavigationControl position="bottom-left" />
