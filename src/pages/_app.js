@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
-//import type { AppProps } from "next/app";
 import { SWRConfig } from "swr";
+import Layout from "../components/layout/Layout";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -15,7 +15,10 @@ export default function App({ Component, pageProps }) {
         },
       }}
     >
-      <Component {...pageProps} />
+      {" "}
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </SWRConfig>
   );
 }
