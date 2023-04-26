@@ -110,34 +110,30 @@ header label span {
   transition: transform 0.125s ease-in, width 0.25s ease-in;
 }
 
-header input[type="checkbox"] {
-  display: none;
-}
-
-header input[type="checkbox"]:checked ~ span:nth-of-type(1),
-header input[type="checkbox"]:checked ~ span:nth-of-type(9) {
+header.expanded label span:nth-of-type(1),
+header.expanded label span:nth-of-type(9) {
   transform: rotate(45deg);
   transform-origin: center;
 }
 
-header input[type="checkbox"]:checked ~ span:nth-of-type(3),
-header input[type="checkbox"]:checked ~ span:nth-of-type(7) {
+header.expanded label span:nth-of-type(3),
+header.expanded label span:nth-of-type(7) {
   transform: rotate(-45deg);
   transform-origin: center;
 }
 
-header input[type="checkbox"]:checked ~ span:nth-of-type(1),
-header input[type="checkbox"]:checked ~ span:nth-of-type(3),
-header input[type="checkbox"]:checked ~ span:nth-of-type(7),
-header input[type="checkbox"]:checked ~ span:nth-of-type(9) {
+header.expanded label span:nth-of-type(1),
+header.expanded label span:nth-of-type(3),
+header.expanded label span:nth-of-type(7),
+header.expanded label span:nth-of-type(9) {
   width: 40px;
   border-radius: 3px;
 }
 
-header input[type="checkbox"]:checked ~ span:nth-of-type(2),
-header input[type="checkbox"]:checked ~ span:nth-of-type(4),
-header input[type="checkbox"]:checked ~ span:nth-of-type(6),
-header input[type="checkbox"]:checked ~ span:nth-of-type(8) {
+header.expanded label span:nth-of-type(2),
+header.expanded label span:nth-of-type(4),
+header.expanded label span:nth-of-type(6),
+header.expanded label span:nth-of-type(8) {
   opacity: 0;
 }
 
