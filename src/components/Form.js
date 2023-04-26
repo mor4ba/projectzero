@@ -2,7 +2,7 @@ import useSWR from "swr";
 import RatingForm from "./RatingForm";
 import FindLocationInput from "./FindLocationInput";
 
-export default function Form() {
+export default function Form({ classes }) {
   const places = useSWR("/api/places");
 
   function handleSubmit(event) {
@@ -37,7 +37,7 @@ export default function Form() {
     <form
       onSubmit={(event) => handleSubmit(event)}
       autoComplete="off"
-      className="p-6 flex align-center flex-col gap-6 items-center"
+      className={`p-6 flex align-center flex-col gap-6 items-center ${classes}`}
     >
       <fieldset className="w-full">
         <label htmlFor="name" className="block">
