@@ -1,6 +1,8 @@
-import mapboxgl from "mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-import React, { useEffect, useState } from "react";
+import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
+import React, { useRef, useEffect, useState } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
+import Link from "next/link";
+import SearchPlace from "./SearchPlace";
 import Map, {
   Marker,
   Popup,
@@ -20,6 +22,7 @@ export default function RenderMap() {
   const [lat, setLat] = useState(52.52);
   const [zoom, setZoom] = useState(12);
   const [popupInfo, setPopupInfo] = useState(null);
+  const mapRef = useRef(null);
 
   const [viewport, setViewport] = useState({});
   useEffect(() => {
@@ -33,14 +36,33 @@ export default function RenderMap() {
     });
   }, []);
 
+  function flyToSearchQuery(lat, lng) {
+    if (lat && lng) {
+      mapRef.current?.flyTo({
+        center: [lat, lng],
+        zoom: 16,
+      });
+    }
+    return;
+  }
+
   const { data, isLoading } = useSWR("/api/places", {
     fallbackData: [],
+  });
+
+  const searchData = data.map((place) => {
+    return {
+      label: place.name,
+      location: [place.latitude, place.longitude],
+      id: place._id,
+    };
   });
 
   if (isLoading) return <div>we load this..</div>;
 
   return (
     <Map
+      ref={mapRef}
       initialViewState={{
         longitude: lng,
         latitude: lat,
@@ -83,9 +105,15 @@ export default function RenderMap() {
           latitude={popupInfo.latitude}
           onClose={() => setPopupInfo(null)}
         >
-          <p>{popupInfo.name}</p>
+          <Link href={`/places/${popupInfo._id}`}>{popupInfo.name}</Link>
         </Popup>
       )}
+
+      <SearchPlace
+        classes="left-10"
+        index={searchData}
+        flyToQuery={flyToSearchQuery}
+      />
     </Map>
   );
 }
