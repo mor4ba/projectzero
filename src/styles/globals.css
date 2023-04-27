@@ -140,3 +140,7 @@ header.expanded label span:nth-of-type(8) {
 svg.pin {
   filter: drop-shadow(0px 17px 5px rgba(0, 0, 0, 0.4));
 }
+
+.MuiAutocomplete-hasPopupIcon {
+  backdrop-filter: blur(10px);
+}

@@ -26,11 +26,7 @@ export default function SearchPlace({ classes, index, flyToQuery }) {
       options={index}
       sx={{ width: 400, ml: 10 }}
       renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Search for quirky places.."
-          isOptionEqualToValue={index.label}
-        />
+        <TextField {...params} label="Search for quirky places.." />
       )}
     />
   );
