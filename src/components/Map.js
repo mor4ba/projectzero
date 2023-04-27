@@ -70,7 +70,7 @@ export default function RenderMap() {
       }}
       style={{ width: "100vw", height: "100vh" }}
       mapStyle="mapbox://styles/mapbox/streets-v11"
-      mapboxAccessToken="pk.eyJ1IjoibW9yNGJhIiwiYSI6ImNsZ2dsc2R6NjBjcWwzZXJyM2hqdGZrejEifQ.Tt-v3iroj4ffhu-uJ69Haw"
+      mapboxAccessToken={mapboxgl.accessToken}
     >
       <GeolocateControl
         positionOptions={{ enableHighAccuracy: true }}
@@ -91,8 +91,6 @@ export default function RenderMap() {
             onClick={(e) => {
               e.originalEvent.stopPropagation();
               setPopupInfo(place);
-              console.log("popupinfo:", popupInfo);
-              console.log(place);
             }}
           >
             <Pin typeOf={place.typeOf} />
@@ -110,7 +108,7 @@ export default function RenderMap() {
       )}
 
       <SearchPlace
-        classes="left-10"
+        classes="left-10 mt-4"
         index={searchData}
         flyToQuery={flyToSearchQuery}
       />
