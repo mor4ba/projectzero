@@ -60,6 +60,10 @@ export default function RenderMap() {
 
   if (isLoading) return <div>we load this..</div>;
 
+  const verifiedData = data.filter((place) =>
+    !place.inModeration ? place : null
+  );
+
   return (
     <Map
       ref={mapRef}
@@ -81,7 +85,7 @@ export default function RenderMap() {
       <NavigationControl position="bottom-left" />
       <ScaleControl position="bottom-left" />
 
-      {data.map((place) => {
+      {verifiedData.map((place) => {
         return (
           <Marker
             key={place._id}
