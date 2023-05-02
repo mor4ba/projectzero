@@ -135,6 +135,7 @@ export default function Singleplace() {
 
     if (response.ok) {
       await response.json();
+      update();
     } else {
       console.error(`"Error: ${response.status}`);
     }
