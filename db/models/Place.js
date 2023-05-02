@@ -14,6 +14,7 @@ const placeSchema = new Schema({
   longitude: { type: Number, required: false },
   typeOf: { type: String, required: true },
   inModeration: { type: Boolean, default: true },
+  count: { type: Number, default: 0 },
   //image: { type: String, required: false },
   //mapURL: { type: String, required: true },
   comment: [commentSchema],
