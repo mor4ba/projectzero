@@ -11,6 +11,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
+import Bucket from "../../components/graphics/Bucket";
+import { useSession } from "next-auth/react";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,14 +53,15 @@ export default function Singleplace() {
   const place = useSWR(`/api/places/${id}`);
   const { data, isLoading } = place;
   const [value, setValue] = useState(0);
-  const [isVisited, setisVisited] = useState(false);
   const theme = useTheme();
+  const { data: session } = useSession();
 
-  var optionalDisabled = {};
-
-  if (!isVisited) {
-    optionalDisabled["disabled"] = "disabled";
+  if (session) {
+    var isBucket = session.user.savedPlaces.find((element) => element === id);
+    var visited = session.user.beenTo.find((element) => element === id);
   }
+  const [isVisited, setisVisited] = useState(visited ? true : false);
+  const [isBucketlist, setIsBucketlist] = useState(isBucket ? true : false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -67,6 +70,8 @@ export default function Singleplace() {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+
+  if (isLoading) return <div>We are currently loading this place.</div>;
 
   async function handleAddComment(data) {
     const response = await fetch(`/api/places/${id}`, {
@@ -102,6 +107,68 @@ export default function Singleplace() {
     }
   }
 
+  async function handleIsVisited(place, session) {
+    if (!session) {
+      alert("you must be logged in to use this feature");
+      return;
+    }
+
+    if (isVisited) {
+      return;
+    }
+
+    setisVisited((isVisited) => true);
+
+    const data = {
+      bool: isVisited,
+      place: place.data._id,
+      session: session.user,
+    };
+
+    const response = await fetch(`/api/user/`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      await response.json();
+    } else {
+      console.error(`"Error: ${response.status}`);
+    }
+  }
+
+  async function handleBucketlist(place, session) {
+    if (!session) {
+      alert("you must be logged in to use this feature");
+      return;
+    }
+
+    setIsBucketlist((isBucketlist) => !isBucketlist);
+
+    const data = {
+      bool: isBucketlist,
+      place: place.data._id,
+      session: session.user,
+    };
+
+    const response = await fetch(`/api/user/`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      await response.json();
+    } else {
+      console.error(`"Error: ${response.status}`);
+    }
+  }
+
   function handleSubmit(event, formKey = "") {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -111,27 +178,36 @@ export default function Singleplace() {
     formKey === "rating" ? handleUpdateRating(data) : handleAddComment(data);
   }
 
-  if (isLoading) return <div>We are currently loading this place.</div>;
-
   return (
     <div className="flex flex-col p-20 px-10 m-auto max-w-4xl">
       <div className="entry-section flex flex-row justify-between border-b-2 pb-4 mb-2 border-white">
         <h1 className="text-2xl">
-          {data.name}{" "}
+          {data.name}
           <span className="tag rounded-lg border-white border-2 py-0 px-2 ml-4 text-lg">
             #{data.typeOf}
           </span>
         </h1>
-
-        <button
-          className="flex text-2xl"
-          onClick={() => setisVisited((isVisited) => !isVisited)}
-        >
-          {isVisited ? "" : "been here? hit the flag."}
-          <Flag state={isVisited} />
-        </button>
+        <div className="button-group flex flex-row gap-2">
+          <button
+            type="button"
+            className="flex text-2xl"
+            onClick={() => handleBucketlist(place, session)}
+          >
+            <Bucket state={isBucketlist} />
+          </button>
+          <button
+            className="flex text-2xl"
+            onClick={() => handleIsVisited(place, session)}
+          >
+            <Flag state={isVisited} />
+          </button>
+        </div>
       </div>
-      <p className="text-xl mb-10">location: {data.location}</p>
+      <p className="text-xl mb-1">location: {data.location}</p>
+      <p className="text-xl mb-10">
+        {data.count} {data.count === 1 ? "person has" : "people have"} been
+        here.
+      </p>
 
       {/* TABBOX */}
       <div>
@@ -143,7 +219,7 @@ export default function Singleplace() {
           >
             <Tab label="Comments" {...a11yProps(0)} />
             <Tab label="Ratings" {...a11yProps(1)} />
-            <Tab label="Rate it!" {...a11yProps(2)} {...optionalDisabled} />
+            <Tab label="Rate it!" {...a11yProps(2)} />
           </Tabs>
         </div>
         <SwipeableViews
