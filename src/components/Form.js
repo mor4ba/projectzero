@@ -2,7 +2,7 @@ import useSWR from "swr";
 import RatingForm from "./RatingForm";
 import FindLocationInput from "./FindLocationInput";
 
-export default function Form({ classes }) {
+export default function Form({ classes, handleClose }) {
   const places = useSWR("/api/places");
 
   function handleSubmit(event) {
@@ -28,6 +28,7 @@ export default function Form({ classes }) {
       await response.json();
       places.mutate();
       //push("/");
+      handleClose();
     } else {
       console.error(`"Error: ${response.status}`);
     }
