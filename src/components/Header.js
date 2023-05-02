@@ -52,7 +52,10 @@ export default function Header() {
       >
         {modalContent === "addPlace" ? (
           <div className="flex self-center items-center  justify-center">
-            <Form classes="bg-gradient-to-r from-sky-500 to-indigo-500 max-w-2xl shadow-2xl" />
+            <Form
+              classes="bg-gradient-to-r from-sky-500 to-indigo-500 max-w-2xl shadow-2xl"
+              handleClose={handleClose}
+            />
           </div>
         ) : (
           <div className="flex self-center items-center  justify-center">
