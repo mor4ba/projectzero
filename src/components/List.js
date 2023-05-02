@@ -1,6 +1,7 @@
+import { handle } from "express/lib/router";
 import Link from "next/link";
 
-export default function List({ data }) {
+export default function List({ data, moderation, handleValidateEntry }) {
   return (
     <ul className="flex flex-col w-full mt-20" role="list">
       <h1 className="uppercase text-2xl">entries</h1>
@@ -17,10 +18,20 @@ export default function List({ data }) {
               href={`/places/${place._id}`}
               passHref
               legacyBehavior
-              className="button"
+              className="button p-2 py-1 m-4 border-2 inline-block"
             >
               more information
             </Link>
+
+            {moderation ? (
+              <button
+                className="p-2 py-1 m-4 border-2"
+                type="button"
+                onClick={() => handleValidateEntry(place._id)}
+              >
+                validate
+              </button>
+            ) : null}
           </li>
         );
       })}
