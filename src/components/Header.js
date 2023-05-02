@@ -4,10 +4,13 @@ import { useState } from "react";
 import OffCanvas from "../components/Offcanvas";
 import Plus from "../components/graphics/Plus";
 import Info from "../components/graphics/Info";
+import Map from "../components/graphics/Map";
+import Lock from "../components/graphics/Lock";
 import Modal from "@mui/material/Modal";
 import Form from "./Form";
 import { useRouter } from "next/router";
 import InfoContent from "./InfoContent";
+import { useSession } from "next-auth/react";
 
 export default function Header() {
   const [visible, setVisible] = useState(false);
@@ -23,26 +26,52 @@ export default function Header() {
     setModalContent(modalContent);
     setOpen(true);
   };
+  const { data: session } = useSession();
+
+  const userIsLoggedIn = (
+    <button type="button" onClick={() => handleOpen("addPlace")}>
+      <Plus />
+    </button>
+  );
+  const adminIsLoggedIn = (
+    <>
+      <button type="button" onClick={() => router.push("/places/moderation")}>
+        <Lock />
+      </button>
+      <button type="button" onClick={() => handleOpen("addPlace")}>
+        <Plus />
+      </button>
+    </>
+  );
 
   return (
     <>
       <header
-        className={`flex fixed top-0 flex-row align-spaced absolute items-center top-0 right-0 z-40 bg-transparent gap-4 px-2 py-4 pointer ${
+        className={`flex fixed top-0 flex-row align-spaced absolute items-center top-0 right-0 z-40 bg-transparent gap-6 px-2 py-4 pointer ${
           visible ? "expanded" : "closed"
         }`}
       >
+        {session && session.user.role === "user"
+          ? userIsLoggedIn
+          : session
+          ? adminIsLoggedIn
+          : null}
+        <button type="button" onClick={() => router.push("/")}>
+          <Map />
+        </button>
         <button type="button" onClick={() => handleOpen("pageInfo")}>
           <Info />
-        </button>
-        <button type="button" onClick={() => handleOpen("addPlace")}>
-          <Plus />
         </button>
         <MenuButton
           handleOffCanvasToggle={setVisible}
           offCanvasState={visible}
         />
       </header>
-      <OffCanvas offCanvasState={visible} handleOffCanvasToggle={setVisible} />
+      <OffCanvas
+        offCanvasState={visible}
+        handleOffCanvasToggle={setVisible}
+        session={session}
+      />
       <Modal
         open={open}
         className="overflow-scroll py-20"

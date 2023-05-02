@@ -3,10 +3,11 @@ import Link from "next/link";
 import Login from "./Login";
 import { useSession } from "next-auth/react";
 
-export default function Offcanvas({ offCanvasState, handleOffCanvasToggle }) {
-  const { data: session } = useSession();
-  console.log(session);
-
+export default function Offcanvas({
+  offCanvasState,
+  handleOffCanvasToggle,
+  session,
+}) {
   const userIsLoggedIn = (
     <Link
       className="cursor-pointer bg-black p-2"
