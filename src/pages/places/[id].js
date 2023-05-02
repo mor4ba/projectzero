@@ -54,7 +54,7 @@ export default function Singleplace() {
   const { data, isLoading } = place;
   const [value, setValue] = useState(0);
   const theme = useTheme();
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
 
   if (session) {
     var isBucket = session.user.savedPlaces.find((element) => element === id);
@@ -164,6 +164,8 @@ export default function Singleplace() {
 
     if (response.ok) {
       await response.json();
+      update();
+      console.log(session);
     } else {
       console.error(`"Error: ${response.status}`);
     }

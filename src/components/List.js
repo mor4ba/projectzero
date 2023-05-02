@@ -1,13 +1,6 @@
-import useSWR from "swr";
 import Link from "next/link";
 
-export default function List() {
-  const { data, isLoading } = useSWR("/api/places", {
-    fallbackData: [],
-  });
-
-  if (isLoading) return <h2>this gonna take some time!</h2>;
-
+export default function List({ data }) {
   return (
     <ul className="flex flex-col w-full mt-20" role="list">
       <h1 className="uppercase text-2xl">entries</h1>
@@ -21,7 +14,7 @@ export default function List() {
             <p>name: {place.name}</p>
             <p>location: {place.location}</p>
             <Link
-              href={`places/${place._id}`}
+              href={`/places/${place._id}`}
               passHref
               legacyBehavior
               className="button"
