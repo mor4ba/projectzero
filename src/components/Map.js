@@ -97,7 +97,7 @@ export default function RenderMap() {
               setPopupInfo(place);
             }}
           >
-            <Pin typeOf={place.typeOf} />
+            <Pin typeOf={place.typeOf} tooltip={place.name} />
           </Marker>
         );
       })}
