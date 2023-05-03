@@ -73,7 +73,7 @@ export default function RenderMap() {
         zoom: zoom,
       }}
       style={{ width: "100vw", height: "100vh" }}
-      mapStyle="mapbox://styles/mapbox/streets-v11"
+      mapStyle="mapbox://styles/mapbox/light-v11"
       mapboxAccessToken={mapboxgl.accessToken}
     >
       <GeolocateControl

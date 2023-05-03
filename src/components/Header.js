@@ -28,6 +28,8 @@ export default function Header() {
   };
   const { data: session } = useSession();
 
+  console.log(session);
+
   const userIsLoggedIn = (
     <button type="button" onClick={() => handleOpen("addPlace")}>
       <Plus />
@@ -35,7 +37,14 @@ export default function Header() {
   );
   const adminIsLoggedIn = (
     <>
-      <button type="button" onClick={() => router.push("/places/moderation")}>
+      <button
+        className="relative"
+        type="button"
+        onClick={() => {
+          handleClose();
+          router.push("/places/moderation");
+        }}
+      >
         <Lock />
       </button>
       <button type="button" onClick={() => handleOpen("addPlace")}>
@@ -80,15 +89,15 @@ export default function Header() {
         aria-describedby="modal-modal-description"
       >
         {modalContent === "addPlace" ? (
-          <div className="flex self-center items-center  justify-center">
+          <div className=" flex self-center items-center mx-40 bg-cover bg-no-repeat justify-center">
             <Form
-              classes="bg-gradient-to-r from-sky-500 to-indigo-500 max-w-2xl shadow-2xl"
+              classes="max-w-3xl shadow-2xl shadow-secondary-color bg-white p-20"
               handleClose={handleClose}
             />
           </div>
         ) : (
           <div className="flex self-center items-center  justify-center">
-            <InfoContent classes="bg-gradient-to-r from-sky-500 to-indigo-500 max-w-2xl shadow-2xl" />
+            <InfoContent classes="bg-white max-w-2xl shadow-xl shadow-secondary-color" />
           </div>
         )}
       </Modal>

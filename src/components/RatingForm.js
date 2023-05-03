@@ -2,14 +2,14 @@ import RangeInput from "./RangeInput";
 
 export default function RatingForm() {
   return (
-    <div className="ratingWrapper flex flex-col gap-4">
-      <p className="mb-6">
+    <div className="rating__wrapper flex flex-col gap-4">
+      <h3 className="text-md">
         To help others to vibe with your place, its helpful to go to through
         some absurd criteria which will help us to put your quirky place in the
         right spotlight.
-      </p>
+      </h3>
       <fieldset className="w-full flex flex-col gap-4 border-b-2 pb-4 items-center">
-        <label className="self-center text-lg" htmlFor="r_dresscode">
+        <label className="self-center" htmlFor="r_dresscode">
           lets talk outfits! certain dresscode?
         </label>
         <RangeInput

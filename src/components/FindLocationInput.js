@@ -1,12 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  margin: 0 auto;
-`;
-
 const SuggestionWrapper = styled.div`
   background: white;
   position: absolute;
@@ -14,11 +8,18 @@ const SuggestionWrapper = styled.div`
   width: 400px;
   padding: 10px 20px;
   border-radius: 0px 0px 10px 10px;
+  order: 3;
+  top: 100%;
+  z-index: 100;
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0px 0px 10px 2px var(--secondary-color);
 `;
 
 const Suggestion = styled.p`
   cursor: pointer;
-  max-width: 400px;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0.25rem 0rem;
 `;
 
 export default function FindLocationInput() {
@@ -41,58 +42,71 @@ export default function FindLocationInput() {
   }
 
   return (
-    <Wrapper>
-      <label htmlFor="location">Address</label>
-      <input
-        className="text-white bg-transparent rounded-lg border-2 my-2"
-        type="text"
-        placeholder="Address"
-        id="location"
-        name="location"
-        value={value}
-        onChange={(event) => handleChange(event)}
-        // isTyping={value !== ""}
-      />
+    <>
+      <fieldset className="w-full flex flex-col relative justify-center">
+        <input
+          className="order-2 text-black bg-transparent rounded-lg border-2 border-primary-grey my-2 p-1 text-sm p-2 px-2"
+          type="text"
+          id="location"
+          name="location"
+          value={value}
+          onChange={(event) => handleChange(event)}
+          // isTyping={value !== ""}
+        />
 
-      {suggestions?.length > 0 && (
-        <SuggestionWrapper>
-          {suggestions.map((suggestion, index) => {
-            return (
-              <Suggestion
-                key={index}
-                onClick={() => {
-                  setValue(suggestion.place_name);
-                  setLatitude(suggestion.center[1]);
-                  setLongitude(suggestion.center[0]);
-                  setSuggestions([]);
-                }}
-              >
-                {suggestion.place_name}
-              </Suggestion>
-            );
-          })}
-        </SuggestionWrapper>
-      )}
+        <label className="order-1 block ml-2" htmlFor="location">
+          Address
+        </label>
 
-      <label htmlFor="latitude">latitude</label>
-      <input
-        className="text-white bg-transparent rounded-lg border-2 my-2"
-        type="number"
-        id="latitude"
-        name="latitude"
-        value={latitude}
-        onChange={setLatitude}
-      />
+        {suggestions?.length > 0 && (
+          <SuggestionWrapper>
+            {suggestions.map((suggestion, index) => {
+              return (
+                <Suggestion
+                  key={index}
+                  onClick={() => {
+                    setValue(suggestion.place_name);
+                    setLatitude(suggestion.center[1]);
+                    setLongitude(suggestion.center[0]);
+                    setSuggestions([]);
+                  }}
+                >
+                  {suggestion.place_name}
+                </Suggestion>
+              );
+            })}
+          </SuggestionWrapper>
+        )}
+      </fieldset>
+      <div className="wrapper w-full flex flex-row gap-4">
+        <fieldset className="w-1/2 flex flex-col relative">
+          <input
+            className="text-black order-2 p-2 bg-transparent rounded-lg border-2 my-2 text-sm"
+            type="number"
+            id="latitude"
+            name="latitude"
+            value={latitude}
+            onChange={setLatitude}
+          />
+          <label className="order-1 ml-2" htmlFor="latitude">
+            latitude
+          </label>
+        </fieldset>
 
-      <label htmlFor="longitude">longitude</label>
-      <input
-        className="text-white bg-transparent rounded-lg border-2 my-2"
-        type="number"
-        id="longitude"
-        name="longitude"
-        value={longitude}
-        onChange={setLongitude}
-      />
-    </Wrapper>
+        <fieldset className="w-1/2 flex flex-col relative justify-center">
+          <input
+            className="text-black order-2 p-2 text-sm bg-transparent rounded-lg border-2 my-2"
+            type="number"
+            id="longitude"
+            name="longitude"
+            value={longitude}
+            onChange={setLongitude}
+          />
+          <label className="order-1 ml-2" htmlFor="longitude">
+            longitude
+          </label>
+        </fieldset>
+      </div>
+    </>
   );
 }

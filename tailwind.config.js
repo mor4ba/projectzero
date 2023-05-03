@@ -12,6 +12,14 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "hero-pattern": "url('/blob-scatter-haikei.svg')",
+      },
+
+      colors: {
+        "primary-color": "#0ea5e9",
+        "secondary-color": "#aacb73",
+        "secondary-darker": "#779c3a",
+        "primary-grey": "#e5e7eb",
       },
     },
   },

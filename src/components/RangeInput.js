@@ -13,9 +13,9 @@ export default function RangeInput({
   const [value, setValue] = useState(5);
 
   return (
-    <div className="relative grid grid-cols-3 gap-2 nowrap w-full gap-4 px-4">
-      <span className="left relative left-0">{left}</span>
+    <fieldset className="rating__input relative grid grid-cols-3 nowrap w-full gap-4 px-4 justify-center">
       <input
+        className="order-2"
         type="range"
         name={name}
         id={id}
@@ -27,7 +27,8 @@ export default function RangeInput({
           setValue(radius);
         }}
       />
-      <span className="right relative text-right">{right}</span>
-    </div>
+      <span className="left order-1 relative justify-self-end">{left}</span>
+      <span className="right relative  order-3 text-right">{right}</span>
+    </fieldset>
   );
 }

@@ -7,13 +7,13 @@ export default function InfoContent({ classes }) {
   switch (pathname) {
     case "/":
       return (
-        <div className={`p-4 ${classes}`}>
+        <div className={`p-6  ${classes}`}>
           <h1 className="text-2xl mb-4 p-2 border-b-2">Hi lost souls!</h1>
           <p className="mb-4">
             This is quirky places. You are welcomed to answer some absurd
             questions to find places around matching your current vibe.{" "}
           </p>
-          <h2 className="text-xl pb-4 mt-10">
+          <h2 className="text-xl pb-4 ">
             Do not gatekeep the cool spots. share with us!
           </h2>
           <p className="mb-4">
@@ -66,7 +66,7 @@ export default function InfoContent({ classes }) {
           </p>
           <h2 className="p-4 pb-0 text-xl mb-4">You like what you see?</h2>
           <p className="mb-4 px-4">
-            Hit the star and save the place to your go-to list. And if you
+            Hit the bucket and save the place to your bucketlist. And if you
             really want to go but still missing company, invite some friends via
             SMS by hitting the invite-icon.
           </p>

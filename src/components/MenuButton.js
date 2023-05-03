@@ -1,7 +1,12 @@
 export default function MenuButton({ handleOffCanvasToggle, offCanvasState }) {
   const spans = [];
   for (let i = 0; i < 9; i++) {
-    spans.push(<span key={i} className="col-span-1 self-center"></span>);
+    spans.push(
+      <span
+        key={i}
+        className="col-span-1 self-center bg-secondary-darker"
+      ></span>
+    );
   }
 
   return (

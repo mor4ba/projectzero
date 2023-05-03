@@ -38,57 +38,97 @@ export default function Form({ classes, handleClose }) {
     <form
       onSubmit={(event) => handleSubmit(event)}
       autoComplete="off"
-      className={`p-6 flex align-center flex-col gap-6 items-center ${classes}`}
+      className={`p-6 flex align-center flex-col gap-6 items-center ${classes} ratingform`}
     >
-      <fieldset className="w-full">
-        <label htmlFor="name" className="block">
-          Tell us it&apos;s quirky name!
-        </label>
+      <h2 className="text-2xl p-2 border-b border-tertiary-color mb-10">
+        Create a new Location
+      </h2>
+      <fieldset className="w-full flex flex-col relative justify-center">
         <input
-          className="text-white bg-transparent rounded-lg border-2 my-2"
+          className="w-full text-black bg-transparent rounded-lg border-primary-grey p-2 text-sm border-2 my-2 order-2"
           type="text"
           id="name"
           name="name"
         />
+        <label htmlFor="name" className="block order-1 ml-2">
+          Tell us it&apos;s quirky name!
+        </label>
       </fieldset>
 
-      <fieldset className="w-full">
-        <legend htmlFor="location" className="block">
-          Where the fun at?
-        </legend>
-        <FindLocationInput />
-      </fieldset>
-      <fieldset>
-        <legend htmlFor="typeOf">What kind of place?</legend>
-        <label htmlFor="bar">Bar</label>
-        <input type="radio" name="typeOf" id="bar" value="bar" />
-        <label htmlFor="club">Club</label>
-        <input type="radio" name="typeOf" id="club" value="club" />
-        <label htmlFor="restaurant">Restaurant</label>
-        <input type="radio" name="typeOf" id="restaurant" value="restaurant" />
-        <label htmlFor="other">Other</label>
-        <input type="radio" name="typeOf" id="other" value="other" />
-      </fieldset>
-      <fieldset className="w-full">
-        <label htmlFor="comment" className="block">
-          Want to leave an initial comment to tell people about the sunny sides
-          of this quirky place?
+      <FindLocationInput />
+
+      <fieldset className="w-full relative flex flex-row radio-group gap-4">
+        <input
+          type="radio"
+          name="typeOf"
+          id="bar"
+          value="bar"
+          className="hidden"
+        />
+        <label
+          htmlFor="bar"
+          className="rounded-lg p-1 px-3 border-primary-grey border-2 w-fit h-fit cursor-pointer"
+        >
+          #Bar
         </label>
+        <input
+          type="radio"
+          name="typeOf"
+          id="club"
+          value="club"
+          className="hidden"
+        />
+        <label
+          htmlFor="club"
+          className="rounded-lg p-1 px-3 border-primary-grey border-2 w-fit h-fit cursor-pointer"
+        >
+          #Club
+        </label>
+        <input
+          type="radio"
+          name="typeOf"
+          id="restaurant"
+          value="restaurant"
+          className="hidden"
+        />
+        <label
+          htmlFor="restaurant"
+          className="rounded-lg p-1 px-3 border-primary-grey border-2 w-fit h-fit cursor-pointer"
+        >
+          #Restaurant
+        </label>
+        <input
+          type="radio"
+          name="typeOf"
+          id="other"
+          value="other"
+          className="hidden"
+        />
+        <label
+          className="rounded-lg p-1 px-3 border-primary-grey border-2 w-fit h-fit cursor-pointer"
+          htmlFor="other"
+        >
+          #Other
+        </label>
+      </fieldset>
+
+      <fieldset className="w-full flex flex-col relative">
         <textarea
-          className="text-white w-full bg-transparent border-2 border-white rounded-lg my-4"
+          className="w-full text-black bg-transparent rounded-lg border-primary-grey p-2 text-sm border-2 my-2 order-2"
           type="text"
           id="comment"
           name="body"
         />
+        <label htmlFor="comment" className="block order-1 ml-3">
+          what makes this place so special?
+        </label>
       </fieldset>
       <RatingForm />
       <button
-        className="relative inline-flex items-center justify-center p-0.5 mb-6 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800"
+        className="relative inline-flex items-center text-xl bg-secondary-color text-white p-1.5 px-6 mb-6 font-medium rounded-lg hover:bg-secondary-darker"
         type="submit"
       >
-        <span className="relative px-5 py-2 transition-all ease-in duration-75 bg-transparent dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-          submit
-        </span>
+        submit
       </button>
     </form>
   );
