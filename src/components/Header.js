@@ -6,6 +6,7 @@ import Plus from "../components/graphics/Plus";
 import Info from "../components/graphics/Info";
 import Map from "../components/graphics/Map";
 import Lock from "../components/graphics/Lock";
+import Arrow from "../components/graphics/Arrow";
 import Modal from "@mui/material/Modal";
 import Form from "./Form";
 import { useRouter } from "next/router";
@@ -31,7 +32,11 @@ export default function Header() {
   console.log(session);
 
   const userIsLoggedIn = (
-    <button type="button" onClick={() => handleOpen("addPlace")}>
+    <button
+      type="button"
+      onClick={() => handleOpen("addPlace")}
+      className="self-start"
+    >
       <Plus />
     </button>
   );
@@ -56,10 +61,21 @@ export default function Header() {
   return (
     <>
       <header
-        className={`flex fixed top-0 flex-row align-spaced absolute items-center top-0 right-0 z-40 bg-transparent gap-6 px-2 py-4 pointer ${
+        className={`${
+          router.pathname != "/" ? "w-full" : null
+        } flex fixed top-0 flex-row align-spaced absolute items-center justify-end top-0 right-0 z-40 bg-transparent gap-6 px-2 py-4 pointer ${
           visible ? "expanded" : "closed"
         }`}
       >
+        {pathname != "/" ? (
+          <button
+            className="absolute left-4 flex flex-row items-center"
+            type="button"
+            onClick={() => router.back()}
+          >
+            <Arrow /> <span className="monospace ml-3">back</span>
+          </button>
+        ) : null}
         {session && session.user.role === "user"
           ? userIsLoggedIn
           : session

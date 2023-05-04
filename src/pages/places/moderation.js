@@ -1,4 +1,5 @@
 import useSWR from "swr";
+import Main from "../../components/layout/Main";
 import List from "../../components/List";
 
 export default function Moderation() {
@@ -31,13 +32,12 @@ export default function Moderation() {
   );
 
   return (
-    <>
-      <h1>Places in Moderation</h1>
+    <Main>
       <List
         data={filteredData}
         moderation={true}
         handleValidateEntry={validateEntry}
       />
-    </>
+    </Main>
   );
 }

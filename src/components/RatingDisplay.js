@@ -1,9 +1,71 @@
+import { ratingClasses } from "@mui/material";
 import ShowRating from "./ShowRating";
+import { uid } from "uid";
 
 export default function RatingDisplay({ data }) {
+  // const ratings = [
+  //   { title: "dresscode", left: "hip", right: "quirky", db: data.r_dresscode },
+  //   {
+  //     title: "should i bring my parents?",
+  //     left: "ok",
+  //     right: "cringe",
+  //     db: {data.r_light}
+  //   },
+  //   {
+  //     title: "people/squaremeter",
+  //     left: "empty",
+  //     right: "packed",
+  //     db: data.r_amountOfPeople,
+  //   },
+  //   { title: "volume", left: "talkin", right: "dancin", db: data.r_volume },
+  //   { title: "age", left: "high school", right: "pension", db: data.r_age },
+  //   {
+  //     title: "how we smell afterwards",
+  //     left: "fresh laundry",
+  //     right: "ashtray",
+  //     db: data.r_isSmoking,
+  //   },
+  //   {
+  //     title: "light situation",
+  //     left: "hip",
+  //     right: "quirky",
+  //     db: data.r_light,
+  //   },
+  //   {
+  //     title: "bring the shmoneyz?",
+  //     left: "hip",
+  //     right: "quirky",
+  //     db: data.r_prices,
+  //   },
+  //   {
+  //     title: "cute staff?",
+  //     left: "kind.",
+  //     right: "yell at you",
+  //     db: data.r_staff,
+  //   },
+  //   {
+  //     title: "heated place?",
+  //     left: "too much",
+  //     right: "siberia",
+  //     db: data.r_temperature,
+  //   },
+  // ];
+
   return (
-    <section className="rating_display flex flex-col gap-4">
-      <h2 className="self-center text-xl uppercase">ratings</h2>
+    <section className="rating_display flex flex-col gap-4 mt-10">
+      {/* {ratings.map((entry) => {
+        return (
+          <ShowRating
+            key={uid()}
+            left={entry.left}
+            right={entry.right}
+            title={entry.title}
+            count={entry.db}
+            range="10"
+          />
+        );
+      })} */}
+
       <ShowRating
         left="hip"
         right="quirky"

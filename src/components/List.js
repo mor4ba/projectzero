@@ -4,7 +4,9 @@ import Link from "next/link";
 export default function List({ data, moderation, handleValidateEntry }) {
   return (
     <ul className="flex flex-col w-full mt-20" role="list">
-      <h1 className="uppercase text-2xl">entries</h1>
+      <h1 className="uppercase text-2xl py-4 border-b border-primary-grey">
+        entries
+      </h1>
       {data.map((place) => {
         return (
           <li
@@ -18,14 +20,14 @@ export default function List({ data, moderation, handleValidateEntry }) {
               href={`/places/${place._id}`}
               passHref
               legacyBehavior
-              className="button p-2 py-1 m-4 border-2 inline-block"
+              className="relative inline-flex w-fit items-center mt-10 self-center text-xl bg-secondary-color text-white p-1.5 px-6 mb-6 font-medium rounded-lg hover:bg-secondary-darker"
             >
               more information
             </Link>
 
             {moderation ? (
               <button
-                className="p-2 py-1 m-4 border-2"
+                className="relative inline-flex w-fit items-center mt-10 self-center text-xl bg-secondary-color text-white p-1.5 px-6 mb-6 font-medium rounded-lg hover:bg-secondary-darker"
                 type="button"
                 onClick={() => handleValidateEntry(place._id)}
               >

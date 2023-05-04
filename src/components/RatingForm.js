@@ -2,8 +2,8 @@ import RangeInput from "./RangeInput";
 
 export default function RatingForm() {
   return (
-    <div className="rating__wrapper flex flex-col gap-4">
-      <h3 className="text-md">
+    <div className="rating__wrapper flex flex-col gap-4 mt-10">
+      <h3 className="text-md max-w-3/4 mb-10">
         To help others to vibe with your place, its helpful to go to through
         some absurd criteria which will help us to put your quirky place in the
         right spotlight.
