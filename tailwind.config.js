@@ -20,6 +20,14 @@ module.exports = {
         "secondary-color": "#aacb73",
         "secondary-darker": "#779c3a",
         "primary-grey": "#e5e7eb",
+        "tertiary-color": "#4b0082",
+      },
+
+      maxWidth: {
+        "1/2": "50%",
+        "3/4": "75%",
+        "1/4": "25%",
+        "1/3": "33%",
       },
     },
   },
