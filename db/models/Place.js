@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 const commentSchema = new Schema({
   body: { type: String, required: true },
   date: { type: String, required: true },
+  likedBy: [{ type: String, required: true, default: "" }],
 });
 
 const placeSchema = new Schema({

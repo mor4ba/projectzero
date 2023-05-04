@@ -40,7 +40,7 @@ export default async function handler(request, response) {
           const updatedComments = await Place.findByIdAndUpdate(id, {
             comment: [
               ...currentPlace.comment,
-              { body: newComment, date: newdate },
+              { body: newComment, date: newdate, likedBy: [] },
             ],
           });
           updatedComments.save();
@@ -85,6 +85,34 @@ export default async function handler(request, response) {
         updateRatings(ratingData);
 
         response.status(201).json({ status: "place created" });
+      } catch (error) {
+        console.log(error);
+        response.status(400).json({ error: error.message });
+      }
+      break;
+    case "PUT":
+      try {
+        const data = request.body;
+        const place = await Place.findById(data.placeID);
+        let comment = place.comment.find(
+          (comment) => comment._id == data.commentID
+        );
+
+        comment.likedBy.includes(data.userID)
+          ? (comment.likedBy = comment.likedBy.filter(
+              (element) => element != data.userID
+            ))
+          : (comment.likedBy = [...comment.likedBy, data.userID]);
+
+        const updatedPlace = await Place.findOneAndUpdate(
+          { _id: data.placeID, "comment._id": data.commentID },
+          {
+            $set: { "comment.$.likedBy": comment.likedBy },
+          }
+        );
+
+        await updatedPlace.save();
+        response.status(201).json({ status: "resolved" });
       } catch (error) {
         console.log(error);
         response.status(400).json({ error: error.message });

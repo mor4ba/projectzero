@@ -1,37 +1,66 @@
 import { uid } from "uid";
+import Heart from "./graphics/Heart";
+import { useSession } from "next-auth/react";
 
-export default function CommentSection({ data, onSubmit }) {
+export default function CommentSection({
+  data,
+  onSubmit,
+  session,
+  handleUpdateComment,
+}) {
   return (
-    <section className="comment__wrapper flex flex-col">
-      <h3 className="py-10 text-xl self-center">
-        wanna do comments? you should.
-      </h3>
-      <form onSubmit={(event) => onSubmit(event)}>
-        <fieldset>
-          <label className="block mb-4" htmlFor="comment">
-            What do you like most about this place?
-          </label>
+    <section className="comment__wrapper flex flex-col p-1.5">
+      <form onSubmit={(event) => onSubmit(event)} className="commentform">
+        <fieldset className="flex relative flex-col mb-4">
           <textarea
-            className="block text-white p-2 mb-4 bg-transparent border-2 rounded-lg w-full"
+            className="block p-2 my-2 bg-transparent border-2 rounded-lg w-full order-2"
             type="text"
             name="comment"
             id="comment"
           ></textarea>
+          <label className="block order-1 ml-2 monospace" htmlFor="comment">
+            tell us the best thing about this place.
+          </label>
         </fieldset>
         <button
-          className="relative inline-flex items-center justify-center p-0.5 mb-6 mr-2 overflow-hidden text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800"
+          className="relative inline-flex items-center text-xl bg-secondary-color text-white p-1.5 px-6 mb-6 font-medium rounded-lg hover:bg-secondary-darker"
           type="submit"
         >
-          <span className="relative px-5 py-2 transition-all ease-in duration-75 bg-transparent dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-            submit
-          </span>
+          submit
         </button>
       </form>
       <ul>
         {data.comment.map((comment) => {
           return (
-            <li key={comment._id} className="p-2 text-md border-b-2 mb-4">
-              <p className="mb-2">{comment.date}</p>
+            <li
+              key={comment._id}
+              className="p-4 text-md border-b-2 mb-4 shadow-md rounded-lg"
+            >
+              <div className="mb-4 pb-2 border-b border-primary-grey monospace flex flex-row nowrap justify-between">
+                <p className="">{comment.date}</p>
+                <span>
+                  {comment.likedBy.length == "1"
+                    ? `1 person liked this.`
+                    : `${comment.likedBy.length} people liked this`}
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleUpdateComment(
+                        comment._id,
+                        data._id,
+                        session.user.id
+                      )
+                    }
+                  >
+                    <Heart
+                      state={
+                        comment.likedBy.includes(session.user.id) ? true : null
+                      }
+                    />
+                  </button>
+                </span>
+              </div>
               <p>{comment.body}</p>
             </li>
           );

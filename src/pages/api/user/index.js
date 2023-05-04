@@ -50,8 +50,6 @@ export default async function handler(request, response) {
           $inc: { count: 1 },
         });
 
-        console.log(updateIncrement);
-
         currentUser.save();
         updateIncrement.save();
         response.status(201).json({ status: "User updated" });

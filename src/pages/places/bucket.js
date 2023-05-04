@@ -2,6 +2,7 @@ import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import Login from "../../components/Login";
 import List from "../../components/List";
+import Main from "../../components/layout/Main";
 
 export default function BucketList() {
   const { data: session } = useSession();
@@ -24,9 +25,9 @@ export default function BucketList() {
   if (isLoading) return <>wait a second!</>;
 
   return (
-    <>
+    <Main>
       <h2>BUCKETLIST</h2>
       <List data={filteredData} />
-    </>
+    </Main>
   );
 }

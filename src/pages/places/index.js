@@ -1,5 +1,6 @@
 import List from "../../components/List";
 import useSWR from "swr";
+import Main from "../../components/layout/Main";
 
 export default function AllPlaces() {
   const { data, isLoading } = useSWR("/api/places", {
@@ -10,7 +11,9 @@ export default function AllPlaces() {
 
   return (
     <>
-      <List data={data} />
+      <Main>
+        <List data={data} />
+      </Main>
     </>
   );
 }
