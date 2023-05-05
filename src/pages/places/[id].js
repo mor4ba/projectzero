@@ -60,7 +60,9 @@ export default function Singleplace() {
   if (session) {
     var isBucket = session.user.savedPlaces.find((element) => element === id);
     var visited = session.user.beenTo.find((element) => element === id);
+    var isRated = data.ratedBy.includes(session.user.id);
   }
+
   const [isVisited, setisVisited] = useState(visited ? true : false);
   const [isBucketlist, setIsBucketlist] = useState(isBucket ? true : false);
 
@@ -94,9 +96,6 @@ export default function Singleplace() {
   }
 
   async function handleUpdateComment(id, placeId, userId) {
-    console.log("commentID", id);
-    console.log("userID", session.user.id);
-    console.log("placeID", placeId);
     const data = { commentID: id, placeID: placeId, userID: userId };
 
     const response = await fetch(`/api/places/${id}`, {
@@ -264,7 +263,9 @@ export default function Singleplace() {
               {...a11yProps(0)}
             />
             <Tab label="Ratings" {...a11yProps(1)} />
-            <Tab label="Rate it!" {...a11yProps(2)} />
+            {!isRated || !isVisited ? (
+              <Tab label="Rate it!" {...a11yProps(2)} />
+            ) : null}
           </Tabs>
         </div>
         <SwipeableViews

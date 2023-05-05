@@ -16,6 +16,7 @@ const placeSchema = new Schema({
   typeOf: { type: String, required: true },
   inModeration: { type: Boolean, default: true },
   count: { type: Number, default: 0 },
+  ratedBy: [{ type: String, required: true, default: "" }],
   //image: { type: String, required: false },
   //mapURL: { type: String, required: true },
   comment: [commentSchema],

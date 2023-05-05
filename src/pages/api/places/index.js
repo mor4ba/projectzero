@@ -37,7 +37,6 @@ export default async function handler(request, response) {
           let newdate = `${month.toUpperCase()} ${day}, ${year}`;
           const newPlace = await Place.findByIdAndUpdate(id, {
             comment: [{ body: placeData.body, date: newdate, likedBye: [] }],
-            inModeration: true,
           });
 
           newPlace.save();

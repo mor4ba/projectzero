@@ -2,17 +2,18 @@ import useSWR from "swr";
 import RatingForm from "./RatingForm";
 import FindLocationInput from "./FindLocationInput";
 
-export default function Form({ classes, handleClose }) {
+export default function Form({ classes, handleClose, session }) {
   const places = useSWR("/api/places");
 
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    data.ratedBy = session.user.id;
+    data.inModeration = true;
     event.target.reset();
-
-    console.log(data);
     handleAddPlace(data);
+    console.log(data);
   }
 
   async function handleAddPlace(data) {
