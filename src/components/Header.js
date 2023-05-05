@@ -29,8 +29,6 @@ export default function Header() {
   };
   const { data: session } = useSession();
 
-  console.log(session);
-
   const userIsLoggedIn = (
     <button
       type="button"
@@ -109,6 +107,7 @@ export default function Header() {
             <Form
               classes="max-w-3xl shadow-2xl shadow-secondary-color bg-white p-20"
               handleClose={handleClose}
+              session={session}
             />
           </div>
         ) : (
