@@ -38,12 +38,13 @@ export default function CommentSection({
             >
               <div className="mb-4 pb-2 border-b border-primary-grey monospace flex flex-row nowrap justify-between">
                 <p className="">{comment.date}</p>
-                <span>
+                <span className="flex items-center align-center">
                   {comment.likedBy.length == "1"
                     ? `1 person liked this.`
                     : `${comment.likedBy.length} people liked this`}
 
                   <button
+                    className="ml-2"
                     type="button"
                     onClick={() =>
                       handleUpdateComment(
