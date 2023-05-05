@@ -14,6 +14,7 @@ import { useTheme } from "@mui/material/styles";
 import Bucket from "../../components/graphics/Bucket";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import SMSapi from "../../components/SMScomponent";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -57,7 +58,7 @@ export default function Singleplace() {
   const theme = useTheme();
   const { data: session, update } = useSession();
 
-  if (session) {
+  if ((session, data)) {
     var isBucket = session.user.savedPlaces.find((element) => element === id);
     var visited = session.user.beenTo.find((element) => element === id);
     var isRated = data.ratedBy.includes(session.user.id);
@@ -300,6 +301,7 @@ export default function Singleplace() {
           </TabPanel>
         </SwipeableViews>
       </div>
+      <SMSapi />
     </div>
   );
 }
