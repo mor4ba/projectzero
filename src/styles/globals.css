@@ -42,7 +42,7 @@
   font-family: monospace;
 }
 
-.ratingform fieldset:not(.radio-group) label,
+.ratingform fieldset:not(.radio-group, .upload) label,
 .commentform fieldset label,
 .popover__form fieldset label {
   font-family: monospace;
@@ -50,8 +50,8 @@
   margin-bottom: -6px;
 }
 
-.ratingform fieldset:not(.radio-group) input:focus,
-.ratingform fieldset:not(.radio-group) textarea:focus,
+.ratingform fieldset:not(.radio-group, .checked-group, .upload) input:focus,
+.ratingform fieldset:not(.radio-group, .checked-group, .upload) textarea:focus,
 .commentform fieldset textarea:focus,
 .popover__form fieldset input:focus,
 .popover__form fieldset textarea:focus {
@@ -59,19 +59,27 @@
   box-shadow: 0px 0px 10px 1px var(--secondary-color);
 }
 
-.ratingform fieldset:not(.radio-group, .rating__input) input:focus ~ label,
-.ratingform fieldset:not(.radio-group, .rating__input) textarea:focus ~ label,
+.ratingform
+  fieldset:not(.radio-group, .rating__input, .checked-group, .upload)
+  input:focus
+  ~ label,
+.ratingform
+  fieldset:not(.radio-group, .rating__input, .checked-group, .upload)
+  textarea:focus
+  ~ label,
 .commentform fieldset textarea:focus ~ label,
 .popover__form fieldset input:focus ~ label,
 .popover__form fieldset textarea:focus ~ label {
   transform: translateY(-10px);
 }
 
-.ratingform fieldset.radio-group input:checked + label {
+.ratingform fieldset.radio-group input:checked + label,
+.ratingform fieldset.checked-group input:checked + label {
   box-shadow: 0px 0px 10px 1px var(--secondary-color);
 }
 
-.ratingform fieldset.radio-group label {
+.ratingform fieldset.radio-group label,
+.ratingform fieldset.checked-group label {
   font-family: monospace;
   text-transform: lowercase;
 }
@@ -117,6 +125,30 @@
 
 .MuiFormLabel-root.Mui-focused {
   color: var(--tertiary-color) !important;
+}
+
+.swiper .swiper-slide img {
+  width: 100%;
+  max-height: 400px;
+  height: 100%;
+  object-fit: cover;
+}
+
+img.preview {
+  box-shadow: 1px 6px 12px -6px rgba(0, 0, 0, 0.8);
+}
+
+.upload label,
+.upload p {
+  transition: all 0.35s ease !important;
+}
+
+.upload label:hover {
+  box-shadow: 0px 0px 10px 1px var(--secondary-color);
+}
+
+.upload label:hover ~ p {
+  transform: translateY(-10px);
 }
 
 body {
