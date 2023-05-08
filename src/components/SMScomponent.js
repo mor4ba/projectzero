@@ -52,7 +52,7 @@ export default function SMSapi() {
         aria-describedby={id}
         variant="contained"
         onClick={handleClick}
-        className="text-secondary-color fixed bottom-6 left-6 p-2 border-2 border-secondary-darker rounded-full hover:bg-secondary-color hover:border-secondary-color hover:text-white transition-all"
+        className="text-tertiary-color fixed bottom-6 left-6 p-2 border-2 border-tertiary-color rounded-full hover:bg-secondary-color hover:border-secondary-color hover:text-white transition-all"
       >
         <Message />
       </button>
