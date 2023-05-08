@@ -8,12 +8,14 @@ export default function Form({ classes, handleClose, session }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
+    const features = formData.getAll("features");
     const data = Object.fromEntries(formData);
+    data.features = features;
     data.ratedBy = session.user.id;
     data.inModeration = true;
+    data.images = [];
     event.target.reset();
     handleAddPlace(data);
-    console.log(data);
   }
 
   async function handleAddPlace(data) {
@@ -58,7 +60,7 @@ export default function Form({ classes, handleClose, session }) {
 
       <FindLocationInput />
 
-      <fieldset className="w-full relative flex flex-row radio-group gap-4">
+      <fieldset className="w-full relative flex mb-1 flex-row radio-group gap-4">
         <input
           type="radio"
           name="typeOf"
@@ -111,6 +113,51 @@ export default function Form({ classes, handleClose, session }) {
         >
           #Other
         </label>
+      </fieldset>
+
+      <fieldset className="w-full flex flex-col relative mb-1 checked-group">
+        <legend className="ml-2 monospace mb-2">features</legend>
+        <div className="wrapper flex flex-row gap-4">
+          <input
+            type="checkbox"
+            name="features"
+            id="kicker"
+            value="kicker"
+            className="hidden"
+          />
+          <label
+            htmlFor="kicker"
+            className="rounded-lg p-1 px-3 border-primary-grey border-2 w-fit h-fit cursor-pointer"
+          >
+            #kicker
+          </label>
+          <input
+            type="checkbox"
+            name="features"
+            id="pool"
+            value="pool"
+            className="hidden"
+          />
+          <label
+            htmlFor="pool"
+            className="rounded-lg p-1 px-3 border-primary-grey border-2 w-fit h-fit cursor-pointer"
+          >
+            #pool table
+          </label>
+          <input
+            type="checkbox"
+            name="features"
+            id="darts"
+            value="darts"
+            className="hidden"
+          />
+          <label
+            htmlFor="darts"
+            className="rounded-lg p-1 px-3 border-primary-grey border-2 w-fit h-fit cursor-pointer"
+          >
+            #darts
+          </label>
+        </div>
       </fieldset>
 
       <fieldset className="w-full flex flex-col relative">

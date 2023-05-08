@@ -61,5 +61,28 @@ export default async function handler(request, response) {
         response.status(400).json({ error: error.message });
       }
       break;
+
+    case "PUT":
+      try {
+        const data = request.body;
+
+        const currentPlace = await Place.findById(data.id);
+        const newImages = currentPlace.images
+          ? [
+              ...currentPlace.images,
+              { url: request.body.image, inModeration: true },
+            ]
+          : [{ url: request.body.image, inModeration: true }];
+
+        const updatedPlace = await Place.findByIdAndUpdate(request.body.id, {
+          images: newImages,
+        });
+
+        updatedPlace.save();
+        response.status(201).json({ status: "image put to db" });
+      } catch (error) {
+        console.log(error);
+        response.status(400).json({ error: error.message });
+      }
   }
 }

@@ -15,6 +15,13 @@ import Bucket from "../../components/graphics/Bucket";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import SMSapi from "../../components/SMScomponent";
+import { uid } from "uid";
+import UploadMedia from "../../components/UploadMedia";
+import { Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -77,7 +84,7 @@ export default function Singleplace() {
 
   if (isLoading) return <div>We are currently loading this place.</div>;
 
-  const staticLocationUrl = `https://api.mapbox.com/styles/v1/mapbox/light-v11/static/pin-l-l+000(${data.longitude},${data.latitude})/${data.longitude},${data.latitude},14/800x300/?access_token=pk.eyJ1IjoibW9yNGJhIiwiYSI6ImNsZ2dsc2R6NjBjcWwzZXJyM2hqdGZrejEifQ.Tt-v3iroj4ffhu-uJ69Haw`;
+  const staticLocationUrl = `https://api.mapbox.com/styles/v1/mapbox/light-v11/static/pin-l-l+000(${data.longitude},${data.latitude})/${data.longitude},${data.latitude},14/800x400/?access_token=pk.eyJ1IjoibW9yNGJhIiwiYSI6ImNsZ2dsc2R6NjBjcWwzZXJyM2hqdGZrejEifQ.Tt-v3iroj4ffhu-uJ69Haw`;
 
   async function handleAddComment(data) {
     const response = await fetch(`/api/places/${id}`, {
@@ -239,18 +246,60 @@ export default function Singleplace() {
         </span>
       </p>
 
-      <div className="image-wrapper w-full relative shadow-lg mb-10">
-        <span className="absolute left-0 top-0 p-2 text-black monospace">
-          {data.location}
-        </span>
-        <Image
-          src={staticLocationUrl}
-          alt={`${data.name} location static image`}
-          width={700}
-          className="object-cover w-full"
-          height="300"
-        />
-      </div>
+      {data.features ? (
+        <ul className="features ml-0 flex flex-row gap-2 mb-10">
+          {data.features.map((feature) => {
+            return (
+              <li key={uid()}>
+                <span className="tag rounded-lg border-primary-grey border-2 p-1 px-2 text-lg">
+                  <span className="monospace">#{feature}</span>
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
+
+      {data.images ? (
+        <Swiper
+          spaceBetween={50}
+          modules={[Navigation, Pagination]}
+          navigation
+          pagination={{ clickable: true }}
+          slidesPerView={1}
+          onSlideChange={() => console.log("slide change")}
+          onSwiper={(swiper) => console.log(swiper)}
+          className="w-full max-h-50 mb-10 shadow-lg"
+        >
+          <SwiperSlide>
+            <span className="absolute left-0 top-0 p-2 text-black monospace">
+              {data.location}
+            </span>
+            <Image
+              src={staticLocationUrl}
+              alt={`${data.name} location static image`}
+              width={700}
+              className="object-cover w-full"
+              height="400"
+            />
+          </SwiperSlide>
+          {data.images.map((slide) => {
+            return (
+              <SwiperSlide key={uid()}>
+                <Image
+                  src={slide.url}
+                  width={800}
+                  height={400}
+                  alt={`${data.name} view`}
+                />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      ) : null}
+
+      <UploadMedia id={data._id} />
+
       <div>
         <div className="text-white mb-8">
           <Tabs
@@ -264,7 +313,7 @@ export default function Singleplace() {
               {...a11yProps(0)}
             />
             <Tab label="Ratings" {...a11yProps(1)} />
-            {!isRated || !isVisited ? (
+            {!isRated || isVisited ? (
               <Tab label="Rate it!" {...a11yProps(2)} />
             ) : null}
           </Tabs>
