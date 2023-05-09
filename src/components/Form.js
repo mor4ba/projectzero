@@ -1,20 +1,74 @@
 import useSWR from "swr";
 import RatingForm from "./RatingForm";
 import FindLocationInput from "./FindLocationInput";
+import UploadIcon from "./graphics/Upload";
+import { useState } from "react";
+import Image from "next/image";
 
 export default function Form({ classes, handleClose, session }) {
   const places = useSWR("/api/places");
+  const [imageSrc, setImageSrc] = useState();
+  const [uploadData, setUploadData] = useState();
 
-  function handleSubmit(event) {
+  function handleOnChange(changeEvent) {
+    const reader = new FileReader();
+
+    reader.onload = function (onLoadEvent) {
+      setImageSrc(onLoadEvent.target.result);
+      setUploadData(undefined);
+    };
+
+    reader.readAsDataURL(changeEvent.target.files[0]);
+
+    // for multiple files
+
+    // for (const file of e.target.files) {
+    //   const reader = new FileReader();
+    //   reader.readAsDataURL(file);
+    //   reader.onload = () => {
+    //     setImageSrc((imgs) => [...imgs, reader.result]);
+    //   };
+    //   reader.onerror = () => {
+    //     console.log(reader.error);
+    //   };
+    // }
+  }
+
+  async function handleSubmit(event) {
     event.preventDefault();
+    const form = event.currentTarget;
+    const fileInput = Array.from(form.elements).find(
+      ({ name }) => name === "file"
+    );
+
     const formData = new FormData(event.target);
+
+    for (const file of fileInput.files) {
+      formData.append("file", file);
+    }
+
+    formData.append("upload_preset", "xoclrdrj");
+    const upload = await fetch(
+      "https://api.cloudinary.com/v1_1/dqcleqhsb/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
+    ).then((r) => r.json());
+
+    setImageSrc(upload.secure_url);
+    setUploadData(upload);
+
     const features = formData.getAll("features");
     const data = Object.fromEntries(formData);
     data.features = features;
     data.ratedBy = session.user.id;
     data.inModeration = true;
-    data.images = [];
+    data.images = imageSrc
+      ? [{ url: upload.secure_url, inModeration: true }]
+      : [];
     event.target.reset();
+    console.log(data);
     handleAddPlace(data);
   }
 
@@ -171,6 +225,34 @@ export default function Form({ classes, handleClose, session }) {
           what makes this place so special?
         </label>
       </fieldset>
+      <fieldset className="upload flex flex-col mb-4 self-start">
+        <input
+          className="hidden"
+          id="file"
+          type="file"
+          name="file"
+          onChange={handleOnChange}
+        />
+        <label
+          htmlFor="file"
+          className="rounded-lg bg-white px-8 w-fit p-2 border-2 border-primary-grey monospace flex flex-row cursor-pointer items-center order-2"
+        >
+          <UploadIcon classes="mr-2" />
+          upload...
+        </label>
+        <p className="monospace ml-2 mb-1 order-1">Upload image</p>
+      </fieldset>
+
+      {imageSrc ? (
+        <Image
+          src={imageSrc}
+          className="preview self-start"
+          width="200"
+          height="100"
+          alt="preview of uploaded media content"
+        />
+      ) : null}
+
       <RatingForm />
       <button
         className="relative inline-flex items-center text-xl bg-secondary-color text-white p-1.5 px-6 mb-6 font-medium rounded-lg hover:bg-secondary-darker"
