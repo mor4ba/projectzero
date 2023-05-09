@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "./spinner.css";
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -303,4 +304,15 @@ svg.pin {
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
+}
+
+.moderation-wrapper button span {
+  opacity: 0;
+  transition: all 0.35s ease;
+  bottom: -0.5rem;
+}
+
+.moderation-wrapper button:hover span {
+  transform: translateY(15px);
+  opacity: 1;
 }
