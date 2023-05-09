@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import Login from "../../components/Login";
 import List from "../../components/List";
 import Main from "../../components/layout/Main";
+import Spinner from "../../components/Spinner";
 
 export default function BucketList() {
   const { data: session } = useSession();
@@ -22,12 +23,16 @@ export default function BucketList() {
     bucketlist.some((item) => element._id === item)
   );
 
-  if (isLoading) return <>wait a second!</>;
+  if (isLoading) return <Spinner />;
 
   return (
     <Main>
-      <h2>BUCKETLIST</h2>
-      <List data={filteredData} />
+      <section className="">
+        <h1 className="text-2xl border-b-2 border-secondary-color py-2">
+          bucketlist
+        </h1>
+        <List data={filteredData} />
+      </section>
     </Main>
   );
 }

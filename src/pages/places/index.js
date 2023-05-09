@@ -1,19 +1,21 @@
 import List from "../../components/List";
 import useSWR from "swr";
 import Main from "../../components/layout/Main";
+import Spinner from "../../components/Spinner";
 
 export default function AllPlaces() {
   const { data, isLoading } = useSWR("/api/places", {
     fallbackData: [],
   });
 
-  if (isLoading) return <h2>this gonna take some time!</h2>;
+  if (isLoading) return <Spinner />;
 
   return (
-    <>
-      <Main>
-        <List data={data} />
-      </Main>
-    </>
+    <Main>
+      <h1 className="text-2xl border-b-2 border-secondary-color py-2">
+        places
+      </h1>
+      <List data={data} />
+    </Main>
   );
 }

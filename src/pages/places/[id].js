@@ -22,6 +22,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import Approve from "../../components/graphics/Approve";
+import No from "../../components/graphics/No";
+import { validateEntry } from "./moderation";
+import Spinner from "../../components/Spinner";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -78,11 +82,24 @@ export default function Singleplace() {
     setValue(newValue);
   };
 
+  async function declineEntry(id) {
+    const response = await fetch(`/api/places/${id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      await response.json();
+      router.push("/places/moderation");
+    } else {
+      console.error(`"Error: ${response.status}`);
+    }
+  }
+
   const handleChangeIndex = (index) => {
     setValue(index);
   };
 
-  if (isLoading) return <div>We are currently loading this place.</div>;
+  if (isLoading) return <Spinner />;
 
   const staticLocationUrl = `https://api.mapbox.com/styles/v1/mapbox/light-v11/static/pin-l-l+000(${data.longitude},${data.latitude})/${data.longitude},${data.latitude},14/800x400/?access_token=pk.eyJ1IjoibW9yNGJhIiwiYSI6ImNsZ2dsc2R6NjBjcWwzZXJyM2hqdGZrejEifQ.Tt-v3iroj4ffhu-uJ69Haw`;
 
@@ -215,7 +232,7 @@ export default function Singleplace() {
   }
 
   return (
-    <div className="flex flex-col p-20 px-10 m-auto max-w-4xl">
+    <div className="flex flex-col p-10 pt-0 m-auto max-w-4xl">
       <div className="entry-section flex flex-row justify-between border-b-2 pb-4 mb-2 border-secondary-color">
         <h1 className="text-2xl">
           {data.name}
@@ -351,6 +368,26 @@ export default function Singleplace() {
         </SwipeableViews>
       </div>
       <SMSapi />
+      {data.inModeration ? (
+        <div className="moderation-wrapper flex flex-row w-full py-8 justify-center gap-8">
+          <button
+            className="text-secondary-color p-2 relative rounded-full border-2 border-secondary-color flex flex-col gap-4"
+            type="button"
+            onClick={() => validateEntry(data._id)}
+          >
+            <Approve />
+            <span className="absolute self-center monospace">verify</span>
+          </button>
+          <button
+            className="p-2 border-2 relative border-red-500 rounded-full text-red-500 flex flex-col gap-4"
+            type="button"
+            onClick={() => declineEntry(data._id)}
+          >
+            <No />
+            <span className="absolute self-center monospace">decline</span>
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default function Offcanvas({
       href="/places/bucket"
       onClick={() => handleOffCanvasToggle(false)}
     >
-      <Chevron />
+      <Chevron className="text-tertiary-color" />
       <span className="text-secondary-darker">bucketlist</span>
     </Link>
   );
@@ -32,7 +32,7 @@ export default function Offcanvas({
           href="/"
           onClick={() => handleOffCanvasToggle(false)}
         >
-          <Chevron />
+          <Chevron className="text-tertiary-color" />
           <span className="text-secondary-darker">home</span>
         </Link>
         <Link
@@ -40,7 +40,7 @@ export default function Offcanvas({
           href="/places"
           onClick={() => handleOffCanvasToggle(false)}
         >
-          <Chevron />
+          <Chevron className="text-tertiary-color" />
           <span className="text-secondary-darker">places</span>
         </Link>
         {session ? userIsLoggedIn : null}

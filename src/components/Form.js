@@ -121,6 +121,7 @@ export default function Form({ classes, handleClose, session }) {
           id="bar"
           value="bar"
           className="hidden"
+          required
         />
         <label
           htmlFor="bar"
@@ -133,6 +134,7 @@ export default function Form({ classes, handleClose, session }) {
           name="typeOf"
           id="club"
           value="club"
+          required
           className="hidden"
         />
         <label
@@ -146,6 +148,7 @@ export default function Form({ classes, handleClose, session }) {
           name="typeOf"
           id="restaurant"
           value="restaurant"
+          required
           className="hidden"
         />
         <label
@@ -159,6 +162,7 @@ export default function Form({ classes, handleClose, session }) {
           name="typeOf"
           id="other"
           value="other"
+          required
           className="hidden"
         />
         <label
