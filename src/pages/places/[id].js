@@ -5,7 +5,7 @@ import RatingDisplay from "../../components/RatingDisplay";
 import CommentSection from "../../components/CommentSection";
 import React from "react";
 import Flag from "../../components/graphics/Flag";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -68,6 +68,7 @@ export default function Singleplace() {
   const [value, setValue] = useState(0);
   const theme = useTheme();
   const { data: session, update } = useSession();
+  const swiperRef = useRef(null);
 
   if ((session, data)) {
     var isBucket = session.user.savedPlaces.find((element) => element === id);
@@ -280,7 +281,7 @@ export default function Singleplace() {
           </span>
         </p>
 
-        {data.features ? (
+        {data.features.length > 0 ? (
           <ul className="features ml-0 flex flex-row gap-2 mb-10">
             {data.features.map((feature) => {
               return (
@@ -298,12 +299,16 @@ export default function Singleplace() {
           <Swiper
             spaceBetween={50}
             modules={[Navigation, Pagination]}
-            navigation
-            pagination={{ clickable: true }}
+            pagination={{
+              clickable: true,
+              dynamicBullets: true,
+              dynamicMainBullets: 1,
+            }}
             slidesPerView={1}
             onSlideChange={() => console.log("slide change")}
             onSwiper={(swiper) => console.log(swiper)}
-            className="w-full max-h-50 mb-10 shadow-lg"
+            className="w-full max-h-50 mb-10"
+            ref={swiperRef}
           >
             <SwiperSlide>
               <span className="absolute left-0 top-0 p-2 text-black monospace">
@@ -347,7 +352,7 @@ export default function Singleplace() {
                 {...a11yProps(0)}
               />
               <Tab label="Ratings" {...a11yProps(1)} />
-              {!isRated || isVisited ? (
+              {!isRated && isVisited ? (
                 <Tab label="Rate it!" {...a11yProps(2)} />
               ) : null}
             </Tabs>

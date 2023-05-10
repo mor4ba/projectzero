@@ -1,4 +1,3 @@
-import Link from "next/link";
 import MenuButton from "./MenuButton";
 import { useState } from "react";
 import OffCanvas from "../components/Offcanvas";
@@ -20,6 +19,8 @@ export default function Header() {
   const handleClose = () => setOpen(false);
   const router = useRouter();
   const { push, pathname } = router;
+  const { data: session } = useSession();
+
   const handleOpen = (modalContent) => {
     if (pathname != "/" && modalContent === "addPlace") {
       push("/");
@@ -27,7 +28,6 @@ export default function Header() {
     setModalContent(modalContent);
     setOpen(true);
   };
-  const { data: session } = useSession();
 
   const userIsLoggedIn = (
     <button
@@ -79,6 +79,7 @@ export default function Header() {
           : session
           ? adminIsLoggedIn
           : null}
+
         <button type="button" onClick={() => router.push("/")}>
           <Map />
         </button>

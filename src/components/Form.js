@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function Form({ classes, handleClose, session }) {
   const places = useSWR("/api/places");
-  const [imageSrc, setImageSrc] = useState();
+  const [imageSrc, setImageSrc] = useState(null);
   const [uploadData, setUploadData] = useState();
 
   function handleOnChange(changeEvent) {
@@ -42,6 +42,7 @@ export default function Form({ classes, handleClose, session }) {
     );
 
     const formData = new FormData(event.target);
+    console.log(formData);
 
     for (const file of fileInput.files) {
       formData.append("file", file);
@@ -55,9 +56,8 @@ export default function Form({ classes, handleClose, session }) {
         body: formData,
       }
     ).then((r) => r.json());
-
-    setImageSrc(upload.secure_url);
     setUploadData(upload);
+    setImageSrc(upload.secure_url);
 
     const features = formData.getAll("features");
     const data = Object.fromEntries(formData);

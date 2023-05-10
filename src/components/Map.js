@@ -19,13 +19,14 @@ import FilterModul from "../components/Filter";
 mapboxgl.accessToken =
   "pk.eyJ1IjoibW9yNGJhIiwiYSI6ImNsZ2dsc2R6NjBjcWwzZXJyM2hqdGZrejEifQ.Tt-v3iroj4ffhu-uJ69Haw";
 
-export default function RenderMap() {
+export default function RenderMap({ places }) {
   const [lng, setLng] = useState(13.4);
   const [lat, setLat] = useState(52.52);
   const [zoom, setZoom] = useState(12);
   const [popupInfo, setPopupInfo] = useState(null);
   const [entries, setEntries] = useState([]);
   const mapRef = useRef(null);
+  const data = places.data;
 
   const [viewport, setViewport] = useState({});
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function RenderMap() {
         zoom: 3.5,
       });
     });
-  }, []);
+  });
 
   function flyToSearchQuery(lat, lng) {
     if (lat && lng) {
@@ -48,12 +49,6 @@ export default function RenderMap() {
     }
     return;
   }
-
-  const places = useSWR("/api/places", {
-    fallbackData: [],
-  });
-
-  const { data, isLoading } = places;
 
   const searchData = entries.map((place) => {
     return {
@@ -94,10 +89,8 @@ export default function RenderMap() {
   }
 
   useEffect(() => {
-    setInitial();
+    setEntries(data.filter((place) => (!place.inModeration ? place : null)));
   }, [data]);
-
-  if (isLoading) return <Spinner />;
 
   function setInitial() {
     setEntries(data.filter((place) => (!place.inModeration ? place : null)));
@@ -108,7 +101,6 @@ export default function RenderMap() {
     setInitial();
   }
 
-  console.log(entries);
   return (
     <Map
       ref={mapRef}
