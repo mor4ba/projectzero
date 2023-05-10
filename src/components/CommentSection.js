@@ -8,6 +8,12 @@ export default function CommentSection({
   session,
   handleUpdateComment,
 }) {
+  data.comment.sort((a, b) => {
+    if (a.likedBy.length < b.likedBy.length) return 1;
+    if (a.likedBy.length > b.likedBy.length) return -1;
+    return 0;
+  });
+
   return (
     <section className="comment__wrapper flex flex-col p-1.5">
       <form onSubmit={(event) => onSubmit(event)} className="commentform">
