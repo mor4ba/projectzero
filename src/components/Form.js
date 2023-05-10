@@ -108,7 +108,7 @@ export default function Form({ classes, handleClose, session }) {
           name="name"
         />
         <label htmlFor="name" className="block order-1 ml-2">
-          Tell us it&apos;s quirky name!
+          say my name, say my name!
         </label>
       </fieldset>
 
