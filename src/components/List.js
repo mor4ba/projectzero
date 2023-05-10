@@ -10,7 +10,7 @@ export default function List({ data }) {
           <Link
             href={`/places/${place._id}`}
             passHref
-            className=" border-b-2 border-white relative inline-flex w-full h-40 self-center shadow-lg"
+            className=" border-b-2 border-white relative inline-flex w-full h-40 self-center shadow-lg hover:shadow-none transition-all"
             key={place._id}
             id={place._id}
           >

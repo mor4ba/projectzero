@@ -24,20 +24,3 @@ export default function Moderation() {
     </Main>
   );
 }
-
-export async function validateEntry(id) {
-  const response = await fetch(`/api/places/`, {
-    method: "PATCH",
-    body: JSON.stringify(id),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  if (response.ok) {
-    await response.json();
-    place.mutate();
-  } else {
-    console.error(`"Error: ${response.status}`);
-  }
-}
