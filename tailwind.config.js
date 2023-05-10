@@ -21,6 +21,7 @@ module.exports = {
         "secondary-darker": "#779c3a",
         "primary-grey": "#e5e7eb",
         "tertiary-color": "#4b0082",
+        "darker-grey": "#4d4b4b",
       },
 
       maxWidth: {

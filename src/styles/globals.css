@@ -4,21 +4,21 @@
 @import "./spinner.css";
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  --foreground-rgb: #4d4b4b;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
   --primary-color: #0ea5e9;
   --secondary-color: #aacb73;
   --primary-grey: #e5e7eb;
-  --primary-grey: #e5e7eb;
+  --darker-grey: #4d4b4b;
   --tertiary-color: #4b0082;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: #4d4b4b;
+    --background-start-rgb: #4d4b4b;
+    --background-end-rgb: #4d4b4b;
   }
 }
 
@@ -75,12 +75,12 @@
 }
 
 .ratingform fieldset.radio-group input:checked + label,
-.ratingform fieldset.checked-group input:checked + label {
+fieldset.checked-group input:checked + label {
   box-shadow: 0px 0px 10px 1px var(--secondary-color);
 }
 
 .ratingform fieldset.radio-group label,
-.ratingform fieldset.checked-group label {
+fieldset.checked-group label {
   font-family: monospace;
   text-transform: lowercase;
 }
@@ -88,7 +88,7 @@
 .rating__input span:not(.marker),
 .rating__container span:not(.marker) {
   background: white;
-  color: black;
+  color: var(--darker-grey);
   border: 1px solid var(--primary-grey);
   border-radius: 15px;
   padding: 0.2rem 0.7rem;
@@ -124,15 +124,44 @@
   border-color: var(--secondary-color) !important;
 }
 
+.MuiInputBase-root {
+  height: 2.8rem;
+  padding: 0 !important;
+}
+
+.MuiInputBase-input::placeholder {
+  top: -2rem;
+  position: relative;
+}
+
 .MuiFormLabel-root.Mui-focused {
   color: var(--tertiary-color) !important;
 }
 
+.swiper {
+  box-shadow: 0 3px 12px -5px rgba(0, 0, 0, 0.8);
+}
+
 .swiper .swiper-slide img {
   width: 100%;
+  height: 400px;
   max-height: 400px;
-  height: 100%;
   object-fit: cover;
+}
+
+.swiper .swiper-pagination .swiper-pagination-bullet-active {
+  background: var(--secondary-color) !important;
+}
+
+.swiper .swiper-pagination-bullet {
+  background: var(--tertiary-color) !important;
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.swiper .swiper-pagination {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
 }
 
 img.preview {
@@ -153,7 +182,7 @@ img.preview {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: #4d4b4b;
   background: linear-gradient(
       to bottom,
       transparent,
@@ -224,6 +253,16 @@ Marker {
   border: none;
 }
 
+.mapboxgl-ctrl {
+  position: relative;
+  top: 0.5rem;
+}
+
+.mapboxgl-ctrl-geolocate {
+  /* position: relative;
+  top: 2rem !important; */
+}
+
 header label {
   width: 30px;
   height: 30px;
@@ -239,7 +278,7 @@ header label:focus {
 }
 
 header label span {
-  background: black;
+  background: var(--darker-grey);
   border-radius: 50%;
   height: 4px;
   width: 4px;
@@ -282,7 +321,7 @@ svg.pin {
 }
 
 .MuiTab-root {
-  color: black !important;
+  color: var(--darker-grey) !important;
   border: 1px solid var(--primary-grey) !important;
   /* border-bottom: none !important */
   border-radius: 0.5rem !important;

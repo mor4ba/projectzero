@@ -16,7 +16,7 @@ export default function Offcanvas({
       onClick={() => handleOffCanvasToggle(false)}
     >
       <Chevron className="text-tertiary-color" />
-      <span className="text-secondary-darker">bucketlist</span>
+      <span className="text-darker-grey">bucketlist</span>
     </Link>
   );
   return (
@@ -28,12 +28,12 @@ export default function Offcanvas({
       <div className="offcanvas__background absolute -z-1 top-0 left-0 w-full h-full opacity-50 bg-primary-grey"></div>
       <nav className="flex flex-col gap-2 mt-20 z-10">
         <Link
-          className="cursor-pointer text-2xl text-secondary-darker p-2 flex flex-row no-wrap items-center p-4"
+          className="cursor-pointer text-2xl text-darker-grey p-2 flex flex-row no-wrap items-center p-4"
           href="/"
           onClick={() => handleOffCanvasToggle(false)}
         >
           <Chevron className="text-tertiary-color" />
-          <span className="text-secondary-darker">home</span>
+          <span className="text-darker-grey">home</span>
         </Link>
         <Link
           className="cursor-pointer text-2xl text-secondary-darker p-2 flex flex-row no-wrap items-center p-4"
@@ -41,7 +41,7 @@ export default function Offcanvas({
           onClick={() => handleOffCanvasToggle(false)}
         >
           <Chevron className="text-tertiary-color" />
-          <span className="text-secondary-darker">places</span>
+          <span className="text-darker-grey">places</span>
         </Link>
         {session ? userIsLoggedIn : null}
       </nav>
