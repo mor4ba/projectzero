@@ -16,7 +16,7 @@ export default function Lock({ state }) {
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
-        viewBox="0 0 23 21"
+        viewBox="0 0 24 24"
         className="fill-secondary-darker w-auto h-auto"
       >
         <title>unlock</title>
