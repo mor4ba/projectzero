@@ -11,8 +11,10 @@ import Map, {
   ScaleControl,
   GeolocateControl,
 } from "react-map-gl";
-import useSWR from "swr";
 import Pin from "./graphics/Pin";
+import Spinner from "../components/Spinner";
+import useSWR from "swr";
+import FilterModul from "../components/Filter";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibW9yNGJhIiwiYSI6ImNsZ2dsc2R6NjBjcWwzZXJyM2hqdGZrejEifQ.Tt-v3iroj4ffhu-uJ69Haw";
@@ -22,6 +24,7 @@ export default function RenderMap() {
   const [lat, setLat] = useState(52.52);
   const [zoom, setZoom] = useState(12);
   const [popupInfo, setPopupInfo] = useState(null);
+  const [entries, setEntries] = useState([]);
   const mapRef = useRef(null);
 
   const [viewport, setViewport] = useState({});
@@ -46,11 +49,13 @@ export default function RenderMap() {
     return;
   }
 
-  const { data, isLoading } = useSWR("/api/places", {
+  const places = useSWR("/api/places", {
     fallbackData: [],
   });
 
-  const searchData = data.map((place) => {
+  const { data, isLoading } = places;
+
+  const searchData = entries.map((place) => {
     return {
       label: place.name,
       location: [place.latitude, place.longitude],
@@ -58,12 +63,52 @@ export default function RenderMap() {
     };
   });
 
-  if (isLoading) return <div>we load this..</div>;
+  function handleFilterChange(event) {
+    const formData = new FormData(event.target.form);
+    const filtered = formData.getAll("filter");
+    const filtered_feature = formData.getAll("filter_feature");
 
-  const verifiedData = data.filter((place) =>
-    !place.inModeration ? place : null
-  );
+    if (filtered.length > 0 && filtered_feature.length == 0) {
+      setEntries(
+        places.data.filter((element) =>
+          filtered.some((item) => element.typeOf === item)
+        )
+      );
+    } else if (filtered.length > 0) {
+      setEntries(
+        places.data.filter(
+          (element) =>
+            filtered.some((item) => element.typeOf == item) &&
+            filtered_feature.every((item) => element.features.includes(item))
+        )
+      );
+    } else if (filtered.length == 0 && filtered_feature.length > 0) {
+      setEntries(
+        places.data.filter((element) =>
+          filtered_feature.every((item) => element.features.includes(item))
+        )
+      );
+    } else if (filtered.length == 0 && filtered_feature.length == 0) {
+      setInitial();
+    }
+  }
 
+  useEffect(() => {
+    setInitial();
+  }, [data]);
+
+  if (isLoading) return <Spinner />;
+
+  function setInitial() {
+    setEntries(data.filter((place) => (!place.inModeration ? place : null)));
+  }
+
+  function resetFilter(event) {
+    event.target.parentNode.parentNode.reset();
+    setInitial();
+  }
+
+  console.log(entries);
   return (
     <Map
       ref={mapRef}
@@ -85,7 +130,7 @@ export default function RenderMap() {
       <NavigationControl position="bottom-left" />
       <ScaleControl position="bottom-left" />
 
-      {verifiedData.map((place) => {
+      {entries.map((place) => {
         return (
           <Marker
             key={place._id}
@@ -115,6 +160,10 @@ export default function RenderMap() {
         classes="left-10 mt-4"
         index={searchData}
         flyToQuery={flyToSearchQuery}
+      />
+      <FilterModul
+        handleFilterChange={handleFilterChange}
+        reset={resetFilter}
       />
     </Map>
   );
