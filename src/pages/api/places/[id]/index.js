@@ -1,7 +1,5 @@
-import Place from "../../../../db/models/Place";
-import dbConnect from "../../../../db/connect";
-
-import { uid } from "uid";
+import Place from "../../../../../db/models/Place";
+import dbConnect from "../../../../../db/connect";
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -12,11 +10,16 @@ export default async function handler(request, response) {
 
   switch (request.method) {
     case "GET":
-      const places = await Place.findById(id);
-      if (!places) {
-        return response.status(404).json({ status: "Not found" });
+      try {
+        const places = await Place.findById(id);
+        if (!places) {
+          return response.status(404).json({ status: "Not found" });
+        }
+        return response.status(200).json(places);
+      } catch (error) {
+        console.log(error);
+        response.status(400).json({ error: error.message });
       }
-      return response.status(200).json(places);
 
       break;
     case "POST":
@@ -37,7 +40,7 @@ export default async function handler(request, response) {
           const updatedComments = await Place.findByIdAndUpdate(id, {
             comment: [
               ...currentPlace.comment,
-              { body: newComment, date: newdate },
+              { body: newComment, date: newdate, likedBy: [] },
             ],
           });
           updatedComments.save();
@@ -54,13 +57,9 @@ export default async function handler(request, response) {
     case "PATCH":
       try {
         const ratingData = request.body;
-
-        console.log(ratingData.r_dresscode);
-
         async function updateRatings(ratingData) {
           const { id } = request.query;
           const currentPlace = await Place.findById(id);
-          console.log("currentPlace:", currentPlace);
           const updatedRatings = await Place.findByIdAndUpdate(id, {
             r_dresscode: [...currentPlace.r_dresscode, ratingData.r_dresscode],
             r_amountOfPeople: [
@@ -86,6 +85,46 @@ export default async function handler(request, response) {
         updateRatings(ratingData);
 
         response.status(201).json({ status: "place created" });
+      } catch (error) {
+        console.log(error);
+        response.status(400).json({ error: error.message });
+      }
+      break;
+    case "PUT":
+      try {
+        const data = request.body;
+        const place = await Place.findById(data.placeID);
+        let comment = place.comment.find(
+          (comment) => comment._id == data.commentID
+        );
+
+        comment.likedBy.includes(data.userID)
+          ? (comment.likedBy = comment.likedBy.filter(
+              (element) => element != data.userID
+            ))
+          : (comment.likedBy = [...comment.likedBy, data.userID]);
+
+        const updatedPlace = await Place.findOneAndUpdate(
+          { _id: data.placeID, "comment._id": data.commentID },
+          {
+            $set: { "comment.$.likedBy": comment.likedBy },
+          }
+        );
+
+        await updatedPlace.save();
+        response.status(201).json({ status: "resolved" });
+      } catch (error) {
+        console.log(error);
+        response.status(400).json({ error: error.message });
+      }
+      break;
+
+    case "DELETE":
+      try {
+        console.log("delete place:", id);
+        await Place.findByIdAndDelete(id);
+
+        response.status(200).json({ status: "place deleted" });
       } catch (error) {
         console.log(error);
         response.status(400).json({ error: error.message });

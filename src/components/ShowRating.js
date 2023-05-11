@@ -11,14 +11,18 @@ export default function ShowRating({ count, range, left, right, title }) {
   const perc = (median / range) * 100;
 
   return (
-    <div className="rating rating__wrapper w-full flex flex-col gap-2 border-b-2 border-white pb-4">
-      <h3 className="self-center">{title}</h3>
-      <div className="rating__container grid grid-cols-3 justify-between gap-4">
-        <span className="left">{left}</span>
-        <div className="range relative w-full bg-white w-20 b-white b-2 border h-6">
+    <div className="rating rating__wrapper w-full flex flex-col gap-2 border-b-2 border-primary-grey pb-4">
+      <h3 className="self-center border-0">{title}</h3>
+      <div className="rating__container grid grid-cols-3 nowrap w-full gap-4 px-4 justify-center">
+        <span className="left justify-self-end">{left}</span>
+        <div className="range relative w-full bg-white w-20 b-white b-2 border h-6 rounded-lg">
           <StyledSpan
             perc={perc}
-            className="marker h-full bg-gradient-to-r from-green-400 to-blue-500 absolute left-0"
+            className={`marker h-full bg-gradient-to-r from-secondary-color to-tertiary-color absolute left-0 ${
+              perc == "100"
+                ? "rounded-lg"
+                : "rounded-lg rounded-tr-none rounded-br-none"
+            }`}
           ></StyledSpan>
         </div>
         <span className="right text-right">{right}</span>

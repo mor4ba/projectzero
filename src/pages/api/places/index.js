@@ -22,7 +22,6 @@ export default async function handler(request, response) {
           .save()
           .then(function (place) {
             const newId = place._id;
-            console.log(place);
             updateInitialComment(newId);
           })
           .catch(function (err) {
@@ -37,8 +36,7 @@ export default async function handler(request, response) {
 
           let newdate = `${month.toUpperCase()} ${day}, ${year}`;
           const newPlace = await Place.findByIdAndUpdate(id, {
-            comment: [{ body: placeData.body, date: newdate }],
-            inModeration: true,
+            comment: [{ body: placeData.body, date: newdate, likedBye: [] }],
           });
 
           newPlace.save();
@@ -50,5 +48,41 @@ export default async function handler(request, response) {
         response.status(400).json({ error: error.message });
       }
       break;
+    case "PATCH":
+      try {
+        const updatedEntry = await Place.findByIdAndUpdate(request.body, {
+          inModeration: false,
+        });
+
+        updatedEntry.save();
+        response.status(201).json({ status: "place created" });
+      } catch (error) {
+        console.log(error);
+        response.status(400).json({ error: error.message });
+      }
+      break;
+
+    case "PUT":
+      try {
+        const data = request.body;
+
+        const currentPlace = await Place.findById(data.id);
+        const newImages = currentPlace.images
+          ? [
+              ...currentPlace.images,
+              { url: request.body.image, inModeration: true },
+            ]
+          : [{ url: request.body.image, inModeration: true }];
+
+        const updatedPlace = await Place.findByIdAndUpdate(request.body.id, {
+          images: newImages,
+        });
+
+        updatedPlace.save();
+        response.status(201).json({ status: "image put to db" });
+      } catch (error) {
+        console.log(error);
+        response.status(400).json({ error: error.message });
+      }
   }
 }
