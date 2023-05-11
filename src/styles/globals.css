@@ -263,6 +263,11 @@ Marker {
   top: 2rem !important; */
 }
 
+.mapboxgl-ctrl-group button {
+  width: 38px !important;
+  height: 38px !important;
+}
+
 header label {
   width: 30px;
   height: 30px;
