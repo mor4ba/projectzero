@@ -6,7 +6,7 @@ export default function Filter() {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="w-8 h-8 text-secondary-darker"
+      className="w-8 h-8 text-darker-grey hover:text-secondary-color transition-all"
     >
       <path
         strokeLinecap="round"

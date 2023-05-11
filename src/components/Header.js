@@ -80,7 +80,11 @@ export default function Header() {
           ? adminIsLoggedIn
           : null}
 
-        <button type="button" onClick={() => router.push("/")}>
+        <button
+          type="button"
+          onClick={() => router.push("/")}
+          className="text-darker-grey hover:text-secondary-color"
+        >
           <Map />
         </button>
         <button type="button" onClick={() => handleOpen("pageInfo")}>

@@ -6,7 +6,7 @@ export default function Map({ state }) {
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      className={state ? "fill-secondary-darker" : "fill-secondary-darker"}
+      className="fill-darker-grey hover:fill-secondary-color transition-all"
     >
       <title>map</title>
       <path d="M0 4.5l7.5-3v18l-7.5 3z"></path>

@@ -2,13 +2,13 @@ export default function Pin({ typeOf, tooltip }) {
   let color = "red";
   switch (typeOf) {
     case "bar":
-      color = "sky-600";
+      color = "sky-500";
       break;
     case "club":
-      color = "red-600";
+      color = "tertiary-color";
       break;
     case "restaurant":
-      color = "green-600";
+      color = "secondary-color";
       break;
     case "other":
       color = "yellow-500";
