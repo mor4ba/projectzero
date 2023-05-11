@@ -4,7 +4,7 @@ export default function MenuButton({ handleOffCanvasToggle, offCanvasState }) {
     spans.push(
       <span
         key={i}
-        className="col-span-1 self-center bg-secondary-darker"
+        className="col-span-1 self-center bg-darker-grey transition-all"
       ></span>
     );
   }
