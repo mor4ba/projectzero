@@ -26,12 +26,16 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-body main form input[type="text"] {
+body main form input[type="text"],
+body main form input[type="number"],
+body main form textarea {
   padding: 0.2rem 0.5rem;
   outline: 0;
 }
 
-body main form input[type="text"]:focus  {
+body main form input[type="text"]:focus,
+body main form input[type="number"]:focus,
+body main form textarea:focus {
   outline: 0;
 }
 
@@ -55,4 +59,88 @@ body main form input[type="text"]:focus  {
   left: 0;
   margin: 12px;
   border-radius: 4px;
+}
+
+Marker {
+  z-index: 10;
+  cursor: pointer;
+}
+
+.mapboxgl-popup {
+  color: black;
+}
+
+.mapboxgl-popup-content {
+  padding: 1rem 1.5rem !important;
+}
+
+.mapboxgl-popup-close-button {
+  font-size: 1rem;
+  padding: 0.2rem;
+  right: 0.35rem !important;
+  border: none;
+  outline: none;
+}
+
+.mapboxgl-popup-close-button:hover,
+.mapboxgl-popup-close-button:focus {
+  outline: none;
+  border: none;
+}
+
+header label {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+header label:hover,
+header label:active,
+header label:focus {
+  -webkit-tap-highlight-color: transparent;
+  outline: 0;
+}
+
+header label span {
+  background: black;
+  border-radius: 50%;
+  height: 4px;
+  width: 4px;
+  transition: transform 0.125s ease-in, width 0.25s ease-in;
+}
+
+header input[type="checkbox"] {
+  display: none;
+}
+
+header input[type="checkbox"]:checked ~ span:nth-of-type(1),
+header input[type="checkbox"]:checked ~ span:nth-of-type(9) {
+  transform: rotate(45deg);
+  transform-origin: center;
+}
+
+header input[type="checkbox"]:checked ~ span:nth-of-type(3),
+header input[type="checkbox"]:checked ~ span:nth-of-type(7) {
+  transform: rotate(-45deg);
+  transform-origin: center;
+}
+
+header input[type="checkbox"]:checked ~ span:nth-of-type(1),
+header input[type="checkbox"]:checked ~ span:nth-of-type(3),
+header input[type="checkbox"]:checked ~ span:nth-of-type(7),
+header input[type="checkbox"]:checked ~ span:nth-of-type(9) {
+  width: 40px;
+  border-radius: 3px;
+}
+
+header input[type="checkbox"]:checked ~ span:nth-of-type(2),
+header input[type="checkbox"]:checked ~ span:nth-of-type(4),
+header input[type="checkbox"]:checked ~ span:nth-of-type(6),
+header input[type="checkbox"]:checked ~ span:nth-of-type(8) {
+  opacity: 0;
+}
+
+svg.pin {
+  filter: drop-shadow(0px 17px 5px rgba(0, 0, 0, 0.4));
 }

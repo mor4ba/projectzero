@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { comment } from "postcss";
 
 const { Schema } = mongoose;
 
@@ -10,11 +9,11 @@ const commentSchema = new Schema({
 
 const placeSchema = new Schema({
   name: { type: String, required: true },
-  //created: new Date(),
   location: { type: String, required: true },
   latitude: { type: Number, required: false },
-  inModeration: { type: Boolean, required: true },
   longitude: { type: Number, required: false },
+  typeOf: { type: String, required: true },
+  inModeration: { type: Boolean, default: true },
   //image: { type: String, required: false },
   //mapURL: { type: String, required: true },
   comment: [commentSchema],

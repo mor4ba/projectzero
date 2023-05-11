@@ -1,10 +1,17 @@
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import React, { useRef, useEffect, useState } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
-import Map, { Marker, GeolocateControl } from "react-map-gl";
+import Map, {
+  Marker,
+  Popup,
+  NavigationControl,
+  FullscreenControl,
+  ScaleControl,
+  GeolocateControl,
+} from "react-map-gl";
 import Image from "next/image";
 import useSWR from "swr";
-//import Geocoder from "react-mapbox-gl-geocoder";
+import Pin from "./graphics/Pin";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibW9yNGJhIiwiYSI6ImNsZ2dsc2R6NjBjcWwzZXJyM2hqdGZrejEifQ.Tt-v3iroj4ffhu-uJ69Haw";
@@ -13,25 +20,7 @@ export default function RenderMap() {
   const [lng, setLng] = useState(13.4);
   const [lat, setLat] = useState(52.52);
   const [zoom, setZoom] = useState(12);
-
-  //   useEffect(() => {
-  //     if (map.current) return; // initialize map only once
-  //     map.current = new mapboxgl.Map({
-  //       container: mapContainer.current,
-  //       style: "mapbox://styles/mapbox/streets-v12",
-  //       center: [lng, lat],
-  //       zoom: zoom,
-  //     });
-  //   });
-
-  //   useEffect(() => {
-  //     if (!map.current) return; // wait for map to initialize
-  //     map.current.on("move", () => {
-  //       setLng(map.current.getCenter().lng.toFixed(4));
-  //       setLat(map.current.getCenter().lat.toFixed(4));
-  //       setZoom(map.current.getZoom().toFixed(2));
-  //     });
-  //   });
+  const [popupInfo, setPopupInfo] = useState(null);
 
   const [viewport, setViewport] = useState({});
   useEffect(() => {
@@ -66,9 +55,37 @@ export default function RenderMap() {
         positionOptions={{ enableHighAccuracy: true }}
         trackUserLocation={true}
       />
-      <Marker longitude={13.4} latitude={52.5} anchor="bottom">
-        <Image src="/flag.svg" alt="mark" width={25} height="25" />
-      </Marker>
+      <FullscreenControl position="bottom-left" />
+      <NavigationControl position="bottom-left" />
+      <ScaleControl position="bottom-left" />
+
+      {data.map((place) => {
+        return (
+          <Marker
+            key={place._id}
+            longitude={place.longitude}
+            latitude={place.latitude}
+            anchor="bottom"
+            onClick={(e) => {
+              e.originalEvent.stopPropagation();
+              setPopupInfo(place);
+              console.log("popupinfo:", popupInfo);
+              console.log(place);
+            }}
+          >
+            <Pin typeOf={place.typeOf} />
+          </Marker>
+        );
+      })}
+      {popupInfo && (
+        <Popup
+          longitude={popupInfo.longitude}
+          latitude={popupInfo.latitude}
+          onClose={() => setPopupInfo(null)}
+        >
+          <p>{popupInfo.name}</p>
+        </Popup>
+      )}
     </Map>
   );
 }
