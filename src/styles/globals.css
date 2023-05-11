@@ -135,7 +135,7 @@ fieldset.checked-group label {
 }
 
 .MuiFormLabel-root.Mui-focused {
-  color: var(--tertiary-color) !important;
+  color: var(--darker-grey) !important;
 }
 
 .swiper {
@@ -354,4 +354,19 @@ svg.pin {
 .moderation-wrapper button:hover span {
   transform: translateY(15px);
   opacity: 1;
+}
+
+.burger:hover span {
+  background-color: var(--secondary-color);
+}
+
+.effect_on {
+  opacity: 0;
+  transition: opacity 0.75s ease, transform 0.8s ease;
+  transform: translateY(100px);
+}
+
+.effect_on.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

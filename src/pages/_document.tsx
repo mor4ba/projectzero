@@ -8,8 +8,8 @@ export default function Document() {
         <NextScript />
         <div className="fill-yellow-500"></div>
         <div className="fill-green-600"></div>
-        <div className="fill-red-600"></div>
-        <div className="fill-sky-600"></div>
+        <div className="fill-tertiary-color"></div>
+        <div className="fill-sky-500"></div>
       </body>
     </Html>
   );
