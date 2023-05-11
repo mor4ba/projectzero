@@ -1,6 +1,4 @@
-import { uid } from "uid";
-import Heart from "./graphics/Heart";
-import { useSession } from "next-auth/react";
+import Comment from "./Comment";
 
 export default function CommentSection({
   data,
@@ -35,41 +33,15 @@ export default function CommentSection({
           submit
         </button>
       </form>
-      <ul>
+      <ul className="overflow-hidden">
         {data.comment.map((comment) => {
           return (
-            <li
+            <Comment
+              comment={comment}
+              handleUpdateComment={handleUpdateComment}
               key={comment._id}
-              className="p-4 text-md border-b-2 mb-4 shadow-md rounded-lg"
-            >
-              <div className="mb-4 pb-2 border-b border-primary-grey monospace flex flex-row nowrap justify-between">
-                <p className="">{comment.date}</p>
-                <span className="flex items-center align-center">
-                  {comment.likedBy.length == "1"
-                    ? `1 person liked this.`
-                    : `${comment.likedBy.length} people liked this`}
-
-                  <button
-                    className="ml-2"
-                    type="button"
-                    onClick={() =>
-                      handleUpdateComment(
-                        comment._id,
-                        data._id,
-                        session.user.id
-                      )
-                    }
-                  >
-                    <Heart
-                      state={
-                        comment.likedBy.includes(session.user.id) ? true : null
-                      }
-                    />
-                  </button>
-                </span>
-              </div>
-              <p>{comment.body}</p>
-            </li>
+              session={session}
+            />
           );
         })}
       </ul>
