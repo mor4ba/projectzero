@@ -23,7 +23,7 @@ export default function Offcanvas({
   );
   return (
     <div
-      className={`offcanvas offcanvas__container flex flex-col justify-between fixed top-0 bg-transparent right-0 z-20 h-full w-2/5 transition-transform duration-300 p-10 border-l-4 ${
+      className={`offcanvas offcanvas__container flex flex-col justify-between fixed top-0 bg-transparent right-0 z-20 h-full w-full lg:w-2/5 transition-transform duration-300 p-4 md:p-10 border-l-4 ${
         offCanvasState ? "translate-x-0" : "translate-x-full"
       }`}
     >

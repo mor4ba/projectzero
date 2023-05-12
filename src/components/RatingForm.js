@@ -10,7 +10,7 @@ export default function RatingForm() {
       </h3>
       <fieldset className="w-full flex flex-col gap-4 border-b-2 pb-4 items-center">
         <label className="self-center" htmlFor="r_dresscode">
-          lets talk outfits! certain dresscode?
+          lets talk outfits! dresscode?
         </label>
         <RangeInput
           id="r_dresscode"
@@ -34,8 +34,8 @@ export default function RatingForm() {
           max="10"
           step="0.5"
           start="5"
-          left="tempelhofer feld"
-          right="packed & sweaty"
+          left="empty"
+          right="packed"
         />
       </fieldset>
       <fieldset className="w-full flex flex-col gap-4 border-b-2 pb-4 items-center">
@@ -64,7 +64,7 @@ export default function RatingForm() {
           start="5"
           step="0.5"
           name="r_isSmoking"
-          left="crisp fresh laundry"
+          left="fresh laundry"
           right="smoked salmon"
         />
       </fieldset>
@@ -80,7 +80,7 @@ export default function RatingForm() {
           start="5"
           name="r_temperature"
           left="siberia"
-          right="devils kitchen"
+          right="oven"
         />
       </fieldset>
       <fieldset className="w-full flex flex-col gap-4 border-b-2 pb-4 items-center">
@@ -100,7 +100,7 @@ export default function RatingForm() {
       </fieldset>
       <fieldset className="w-full flex flex-col gap-4 border-b-2 pb-4 items-center">
         <label className="block" htmlFor="cringe">
-          Cringeness
+          bring my weirdo friends?
         </label>
         <RangeInput
           id="cringe"
@@ -109,8 +109,8 @@ export default function RatingForm() {
           start="5"
           step="0.5"
           name="r_cringe"
-          left="not at all"
-          right="cringealert"
+          left="rather not"
+          right="in best company"
         />
       </fieldset>
       <fieldset className="w-full flex flex-col gap-4 border-b-2 pb-4 items-center">
@@ -124,8 +124,8 @@ export default function RatingForm() {
           start="5"
           step="0.5"
           name="r_age"
-          left="fresh outta high school"
-          right="straight into pension"
+          left="high school"
+          right="bill murray"
         />
       </fieldset>
       <fieldset className="w-full flex flex-col gap-4 border-b-2 pb-4 items-center">
@@ -140,7 +140,7 @@ export default function RatingForm() {
           step="0.5"
           name="r_staff"
           left="want to be yelled at"
-          right="would bring my parents"
+          right="lovely people"
         />
       </fieldset>
       <fieldset className="w-full flex flex-col gap-4 border-b-2 pb-4 items-center">
@@ -155,7 +155,7 @@ export default function RatingForm() {
           step="0.5"
           name="r_prices"
           left="basically for free"
-          right="monthly salary"
+          right="draconic prices"
         />
       </fieldset>
     </div>

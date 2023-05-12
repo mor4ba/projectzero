@@ -4,9 +4,9 @@ import UserIcon from "../components/graphics/User";
 export default function Login({ session }) {
   if (session) {
     return (
-      <div className="p-4 flex flex-row justify-between items-center z-10">
+      <div className="lg:p-4 mb-10 flex flex-col gap-4 justify-center items-center z-10">
         <div className="wrapper flex flex-row gap-4">
-          <UserIcon />{" "}
+          <UserIcon />
           <span className="monospace text-lg">{session.user.email}</span>
         </div>
         <button
@@ -21,7 +21,7 @@ export default function Login({ session }) {
   }
 
   return (
-    <div className="p-4 flex flex-row justify-between items-center z-10">
+    <div className="p-4 flex flex-row justify-center items-center z-10">
       <span className="monospace text-lg">not signed in</span>
       <button
         type="button"

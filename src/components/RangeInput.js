@@ -13,7 +13,7 @@ export default function RangeInput({
   const [value, setValue] = useState(5);
 
   return (
-    <fieldset className="rating__input relative grid grid-cols-3 nowrap w-full gap-4 px-4 justify-center">
+    <fieldset className="rating__input relative grid grid-cols-3 nowrap w-full gap-4 md:px-4 justify-center items-center">
       <input
         className="order-2"
         type="range"
@@ -27,8 +27,12 @@ export default function RangeInput({
           setValue(radius);
         }}
       />
-      <span className="left order-1 relative justify-self-end">{left}</span>
-      <span className="right relative  order-3 text-right">{right}</span>
+      <span className=" h-fit left order-1 relative justify-self-end">
+        {left}
+      </span>
+      <span className="  h-fit right relative  order-3 text-right">
+        {right}
+      </span>
     </fieldset>
   );
 }

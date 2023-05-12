@@ -110,14 +110,14 @@ export default function Header() {
         {modalContent === "addPlace" ? (
           <div className=" flex self-center items-center mx-40 bg-cover bg-no-repeat justify-center">
             <Form
-              classes="max-w-3xl shadow-2xl shadow-secondary-color bg-white p-20"
+              classes=" max-w-3/4 md:max-w-3xl shadow-2xl shadow-secondary-color bg-white p-20"
               handleClose={handleClose}
               session={session}
             />
           </div>
         ) : (
           <div className="flex self-center items-center  justify-center">
-            <InfoContent classes="bg-white max-w-2xl shadow-xl shadow-secondary-color" />
+            <InfoContent classes="max-w-full mx-4 bg-white md:max-w-2xl shadow-xl shadow-secondary-color" />
           </div>
         )}
       </Modal>

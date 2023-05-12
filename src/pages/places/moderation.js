@@ -15,7 +15,7 @@ export default function Moderation() {
 
   return (
     <Main>
-      <section className="">
+      <section className="py-10">
         <h1 className="text-2xl border-b-2 border-secondary-color py-2">
           places in moderation
         </h1>

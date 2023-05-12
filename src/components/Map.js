@@ -12,8 +12,7 @@ import Map, {
   GeolocateControl,
 } from "react-map-gl";
 import Pin from "./graphics/Pin";
-import Spinner from "../components/Spinner";
-import useSWR from "swr";
+import Search from "./graphics/Search";
 import FilterModul from "../components/Filter";
 
 mapboxgl.accessToken =
@@ -147,9 +146,8 @@ export default function RenderMap({ places }) {
           <Link href={`/places/${popupInfo._id}`}>{popupInfo.name}</Link>
         </Popup>
       )}
-
       <SearchPlace
-        classes="left-10 mt-4"
+        classes=""
         index={searchData}
         flyToQuery={flyToSearchQuery}
       />

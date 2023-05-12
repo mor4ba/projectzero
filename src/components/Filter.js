@@ -15,11 +15,11 @@ export default function FilterModul({ handleFilterChange, reset }) {
   };
 
   const openPopover = Boolean(anchorEl);
-  const popoverId = openPopover ? "simple-popover" : undefined;
+  const popoverId = openPopover ? "filter-popover" : undefined;
   return (
     <>
       <button
-        className="relative left-2"
+        className="absolute left-16 top-2.5 md:relative md:left-2"
         type="button"
         onClick={handleClick}
         aria-describedby={popoverId}
@@ -36,6 +36,7 @@ export default function FilterModul({ handleFilterChange, reset }) {
           vertical: "bottom",
           horizontal: "left",
         }}
+        className="mt-4"
       >
         <form className="p-4" onChange={(event) => handleFilterChange(event)}>
           <div className="wrapper flex flex-row justify-between">
@@ -48,7 +49,7 @@ export default function FilterModul({ handleFilterChange, reset }) {
             </h3>
           </div>
           <fieldset className="checked-group pt-4 flex flex-col gap-2">
-            <div className="first-row flex flex-row gap-2">
+            <div className="first-row flex flex-wrap flex-row gap-2">
               <input
                 type="checkbox"
                 name="filter"
@@ -108,7 +109,7 @@ export default function FilterModul({ handleFilterChange, reset }) {
 
             <h3 className="monospace mt-4">Features</h3>
             <div className="second-row mt-2 border-t-2 border-primary-grey flex flex-row gap-2">
-              <fieldset className="checked-group pt-4 flex flex-row gap-2">
+              <fieldset className="checked-group pt-4 flex flex-wrap flex-row gap-2">
                 <input
                   type="checkbox"
                   name="filter_feature"

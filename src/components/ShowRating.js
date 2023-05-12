@@ -13,8 +13,8 @@ export default function ShowRating({ count, range, left, right, title }) {
   return (
     <div className="rating rating__wrapper w-full flex flex-col gap-2 border-b-2 border-primary-grey pb-4">
       <h3 className="self-center border-0">{title}</h3>
-      <div className="rating__container grid grid-cols-3 nowrap w-full gap-4 px-4 justify-center">
-        <span className="left justify-self-end">{left}</span>
+      <div className="rating__container grid grid-cols-3 nowrap w-full gap-4 md:px-4 justify-center items-center">
+        <span className="left justify-self-end h-fit">{left}</span>
         <div className="range relative w-full bg-white w-20 b-white b-2 border h-6 rounded-lg">
           <StyledSpan
             perc={perc}
@@ -25,7 +25,7 @@ export default function ShowRating({ count, range, left, right, title }) {
             }`}
           ></StyledSpan>
         </div>
-        <span className="right text-right">{right}</span>
+        <span className="right text-right h-fit">{right}</span>
       </div>
     </div>
   );

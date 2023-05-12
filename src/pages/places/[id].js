@@ -258,16 +258,16 @@ export default function Singleplace() {
               <span className="monospace">#{data.typeOf}</span>
             </span>
           </h1>
-          <div className="button-group flex flex-row gap-2">
+          <div className="button-group flex flex-row gap-2 items-center">
             <button
               type="button"
-              className="flex text-2xl"
+              className="flex text-2xl h-fit"
               onClick={() => handleBucketlist(place, session)}
             >
               <Bucket state={isBucketlist} />
             </button>
             <button
-              className="flex text-2xl"
+              className="flex text-2xl h-fit"
               onClick={() => handleIsVisited(place, session)}
             >
               <Flag state={isVisited} />
