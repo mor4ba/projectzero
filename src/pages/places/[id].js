@@ -70,7 +70,12 @@ export default function Singleplace() {
   const { data: session, update } = useSession();
   const swiperRef = useRef(null);
 
-  if ((session, data)) {
+  const [isVisited, setisVisited] = useState(visited ? true : false);
+  const [isBucketlist, setIsBucketlist] = useState(isBucket ? true : false);
+
+  if (isLoading) return <Spinner />;
+
+  if (session) {
     var isBucket = session.user.savedPlaces.find((element) => element === id);
     var visited = session.user.beenTo.find((element) => element === id);
     var isRated = data.ratedBy.includes(session.user.id);
@@ -78,10 +83,6 @@ export default function Singleplace() {
     const session = {};
   }
 
-  const [isVisited, setisVisited] = useState(visited ? true : false);
-  const [isBucketlist, setIsBucketlist] = useState(isBucket ? true : false);
-
-  if (isLoading) return <Spinner />;
   const staticLocationUrl = `https://api.mapbox.com/styles/v1/mapbox/light-v11/static/pin-l-l+000(${data.longitude},${data.latitude})/${data.longitude},${data.latitude},14/800x400/?access_token=pk.eyJ1IjoibW9yNGJhIiwiYSI6ImNsZ2dsc2R6NjBjcWwzZXJyM2hqdGZrejEifQ.Tt-v3iroj4ffhu-uJ69Haw`;
 
   const handleChange = (event, newValue) => {
