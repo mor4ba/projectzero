@@ -21,7 +21,7 @@ export default function Login({ session }) {
   }
 
   return (
-    <div className="p-4 flex flex-row justify-center items-center z-10">
+    <div className="p-4 flex flex-col gap-4 justify-center items-center z-10">
       <span className="monospace text-lg">not signed in</span>
       <button
         type="button"

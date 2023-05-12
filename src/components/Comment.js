@@ -36,12 +36,21 @@ export default function Comment({ comment, handleUpdateComment, session }) {
           <button
             className="ml-2"
             type="button"
-            onClick={() =>
-              handleUpdateComment(comment._id, data._id, session.user.id)
+            onClick={
+              session
+                ? () =>
+                    handleUpdateComment(comment._id, data._id, session.user.id)
+                : null
             }
           >
             <Heart
-              state={comment.likedBy.includes(session.user.id) ? true : null}
+              state={
+                session
+                  ? comment.likedBy.includes(session.user.id)
+                    ? true
+                    : null
+                  : null
+              }
             />
           </button>
         </span>
