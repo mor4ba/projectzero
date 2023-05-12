@@ -70,7 +70,7 @@ export default function Singleplace() {
   const { data: session, update } = useSession();
   const swiperRef = useRef(null);
 
-  if (session) {
+  if ((session, data)) {
     var isBucket = session.user.savedPlaces.find((element) => element === id);
     var visited = session.user.beenTo.find((element) => element === id);
     var isRated = data.ratedBy.includes(session.user.id);
