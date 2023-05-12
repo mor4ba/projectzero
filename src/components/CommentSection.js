@@ -41,6 +41,7 @@ export default function CommentSection({
               handleUpdateComment={handleUpdateComment}
               key={comment._id}
               session={session}
+              data={data}
             />
           );
         })}

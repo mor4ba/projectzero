@@ -3,7 +3,12 @@ import Heart from "./graphics/Heart";
 import { useSession } from "next-auth/react";
 import { useRef, useState, useEffect } from "react";
 
-export default function Comment({ comment, handleUpdateComment, session }) {
+export default function Comment({
+  comment,
+  handleUpdateComment,
+  session,
+  data,
+}) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef();
 
